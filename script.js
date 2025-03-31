@@ -138,6 +138,10 @@ function loadQuestion() {
     const question = currentQuestions[currentQuestionIndex];
     
     questionText.textContent = question.question;
+    
+    // Update question header to show just "Question"
+    document.querySelector('.question-number').textContent = 'Question';
+    
     optionsContainer.innerHTML = '';
     
     question.options.forEach((option, index) => {
@@ -1317,7 +1321,7 @@ function generateSmartAnalysis(stats) {
 }
 
 // Rename the stats page title to something more engaging
-const statsTitle = "CET Performance Report: From Shelar to Zondhale Scale 📊";
+const statsTitle = "CET Performance Report📊";
 
 // Add helper function to get question details
 function getQuestionDetails(subject) {
@@ -1327,4 +1331,76 @@ function getQuestionDetails(subject) {
         correct: questions[subject].filter((q, i) => q.correct && answers[subject][i] === q.correct).length,
         incorrect: questions[subject].filter((q, i) => q.correct && answers[subject][i] !== null && answers[subject][i] !== q.correct).length
     };
+}
+
+// Update timer controls
+function pauseTimer() {
+    isPaused = true;
+    pauseBtn.style.display = 'none';
+    playBtn.style.display = 'inline-block';
+    document.body.classList.add('timer-paused');
+}
+
+function resumeTimer() {
+    isPaused = false;
+    playBtn.style.display = 'none';
+    pauseBtn.style.display = 'inline-block';
+    document.body.classList.remove('timer-paused');
+}
+
+// Add event listeners for timer controls
+pauseBtn.addEventListener('click', pauseTimer);
+playBtn.addEventListener('click', resumeTimer);
+
+// Emergency Math Access
+const emergencyMathBtn = document.createElement('button');
+emergencyMathBtn.className = 'emergency-math-btn';
+emergencyMathBtn.innerHTML = '<i class="fas fa-calculator"></i> Emergency Math Access';
+
+// Add the emergency button after the subject tabs
+const subjectTabsContainer = document.querySelector('.subject-tabs');
+if (subjectTabsContainer) {
+    subjectTabsContainer.appendChild(emergencyMathBtn);
+    // Add event listener for the emergency math button
+    emergencyMathBtn.addEventListener('click', showEmergencyMathWarning);
+}
+
+function showEmergencyMathWarning() {
+    const warningModal = document.createElement('div');
+    warningModal.className = 'warning-modal';
+    warningModal.innerHTML = `
+        <div class="warning-content emergency-warning">
+            <i class="fas fa-exclamation-triangle warning-icon"></i>
+            <h2>⚠️ Emergency Math Section Access ⚠️</h2>
+            <p>WARNING: You are about to access the Mathematics section before completing Physics & Chemistry.</p>
+            <p>This is meant for emergencies only and may affect your test performance.</p>
+            <p>Are you sure you want to proceed?</p>
+            <div class="warning-buttons">
+                <button class="cancel-btn">Cancel</button>
+                <button class="proceed-btn">Yes, Proceed</button>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(warningModal);
+    
+    const cancelBtn = warningModal.querySelector('.cancel-btn');
+    const proceedBtn = warningModal.querySelector('.proceed-btn');
+    
+    cancelBtn.addEventListener('click', () => {
+        warningModal.remove();
+    });
+    
+    proceedBtn.addEventListener('click', () => {
+        isMathSectionUnlocked = true;
+        const mathsTab = document.querySelector('[data-subject="maths"]');
+        if (mathsTab) {
+            mathsTab.disabled = false;
+            mathsTab.style.pointerEvents = 'auto';
+            mathsTab.style.opacity = '1';
+            // Switch to maths section
+            switchSubject('maths');
+        }
+        warningModal.remove();
+    });
 } 
