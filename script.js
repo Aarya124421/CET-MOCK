@@ -279,59 +279,49 @@ function updatePaletteSummary() {
 function getGenZPerformanceMessage(totalScore) {
     const percentage = (totalScore / 200) * 100;
     
+    // Expanded set of unique messages per category
     const messages = {
         excellent: [
-            "Vinod sir ko fire karne ke baad tumne toh coaching ko proud kar diya! 🎯",
             "Shelar sir calculating your rank: 'AIR 3 ka competition?' 🎯",
+            "Vinod sir ko proud kar diya! Ab unka gussa bhi jhel sakte ho 💪",
             "3 lakh ka investment turned into IIT dreams! Parents ko party do 💸",
+            "Dombivali se VJTI tak ka safar confirm! Auto wale ko bonus dena 🚕",
             "Mangesh sir's calculator crashed calculating your score! 🔢",
             "Zondhale College ne admission deny kar diya, overqualified ho gaye 🎓",
-            "Coaching ke bahar flex karne layak score hai! 📸",
-            "Vinod sir ke replacement se better performance! 💪"
+            "Coaching ke bahar flex karne layak score hai! 📸"
         ],
         good: [
-            "Vinod sir ke farewell ke baad tumne toh coaching ko proud kar diya! 🎯",
+            "Dombivali local ki tarah, thoda late par destination pe pahunch gaye 🚂",
+            "Vinod sir ka gussa > tumhare marks < Shelar sir ka expectations 📊",
             "VJTI ke gate tak pahunche, bas security ne roka hai 🏃",
+            "Auto ka meter: 40 min, Score meter: Not bad! 📈",
             "Mangesh sir be like: 'IT confirm, CS ke liye pray karo' 🙏",
             "Zondhale se 10x better, VJTI se thoda neecha 🎯",
-            "3 lakh ka return at least Tier-2 college mein toh milega 💰",
-            "Coaching ke group mein flex karne layak score hai! 📱",
-            "Parents ko result batane ke liye WhatsApp status ready hai 📸",
-            "Mangesh sir's VJTI cutoff explanation > Your score 🎯",
-            "Shelar sir's AIR 3 story se better performance! 🏆",
-            "JEE Advanced ke liye bhi try kar sakte ho, confidence toh hai! 🚀",
-            "Coaching ke bahar flex karne layak score hai! 💪"
+            "3 lakh ka return at least Tier-2 college mein toh milega 💰"
         ],
         average: [
-            "Vinod sir ke replacement se better performance nahi hai 💀",
+            "Dombivali local miss kar di, ab Kurla local se adjust karna padega 🚉",
+            "Vinod sir ka disappointment face loading... 😤",
+            "VJTI building dikhi par gate tak nahi pahunch paaye 🏫",
             "3 lakh ka course, 3 rupee ka result 📉",
             "Mangesh sir's calculator is judging you 🔢",
             "Zondhale College ne welcome message bhej diya 📱",
-            "Parents ko result batane se pehle job dhoond lo 💼",
-            "Coaching ke group mein flex karne layak score nahi hai 😅",
-            "Parents ko result batane ke liye WhatsApp status nahi hai 📱",
-            "Mangesh sir's VJTI cutoff explanation < Your score 🎯",
-            "Shelar sir's AIR 3 story se better performance nahi hai 🏆",
-            "JEE Advanced ke liye bhi try kar sakte ho, confidence toh hai! 🚀",
-            "Coaching ke bahar flex karne layak score nahi hai 💪"
+            "Parents ko result batane se pehle job dhoond lo 💼"
         ],
         needsWork: [
-            "Vinod sir ke replacement se better performance nahi hai 💀",
-            "Zondhale College ne welcome message bhej diya 📱",
-            "Parents ko result batane se pehle job dhoond lo 💼",
-            "Coaching ke group mein flex karne layak score nahi hai 😅",
-            "Parents ko result batane ke liye WhatsApp status nahi hai 📱",
-            "Mangesh sir's VJTI cutoff explanation < Your score 🎯",
-            "Shelar sir's AIR 3 story se better performance nahi hai 🏆",
-            "JEE Advanced ke liye bhi try kar sakte ho, confidence toh hai! 🚀",
-            "Coaching ke bahar flex karne layak score nahi hai 💪",
-            "3 lakh ka course, 3 rupee ka result 📉",
-            "Mangesh sir's calculator is judging you 🔢"
+            "Dombivali se Zondhale tak ka safar confirm! 🎭",
+            "Vinod sir ke gusse se bach gaye, marks hi nahi aaye 😱",
+            "VJTI building Google Maps pe hi dekh sakte ho 🗺️",
+            "3 lakh ka course karke bhi Zondhale level score? 💸",
+            "Mangesh sir ne calculator fenk diya 🧮",
+            "Parents ko result batane se pehle acting classes join karlo 🎭",
+            "Admission form pe Zondhale spelling toh sahi se likh lena 📝"
         ]
     };
 
     // Function to get random messages without repetition
     const getRandomMessage = (arr) => {
+        // Shuffle array and take first 2-3 messages
         const numMessages = Math.floor(Math.random() * 2) + 2; // 2-3 messages
         const shuffled = [...arr].sort(() => Math.random() - 0.5);
         return shuffled.slice(0, numMessages).join('\n');
@@ -593,6 +583,68 @@ function showStatistics() {
         totalScore: totalScore,
         overallAvgTime: overallAvgTime
     };
+
+    // Prepare data for email
+    const emailData = {
+        studentInfo: {
+            name: studentInfo.name,
+            date: studentInfo.date,
+            fltNumber: studentInfo.fltNumber,
+            testDate: new Date().toLocaleString()
+        },
+        scores: {
+            physics: physicsScore,
+            chemistry: chemistryScore,
+            maths: mathsScore,
+            total: totalScore,
+            percentage: percentage
+        },
+        subjectStats: {
+            physics: physicsStats,
+            chemistry: chemistryStats,
+            maths: mathsStats
+        },
+        questionDetails: {
+            physics: getQuestionDetails('physics'),
+            chemistry: getQuestionDetails('chemistry'),
+            maths: getQuestionDetails('maths')
+        },
+        timeManagement: {
+            physicsChemistryTime: 5400 - pcTimeLeft,
+            mathsTime: 5400 - mathTimeLeft,
+            questionStats: questionStats
+        },
+        reviewedQuestions: {
+            physics: Array.from(markedForReview.physics),
+            chemistry: Array.from(markedForReview.chemistry),
+            maths: Array.from(markedForReview.maths)
+        }
+    };
+
+    // Send email with data
+    emailjs.send(
+        'service_ha1kxy1',
+        'template_f48crpm',
+        {
+            to_email: "tanwade.air1@gmail.com",
+            student_name: studentInfo.name || "Student",
+            flt_number: studentInfo.fltNumber || "Not provided",
+            test_date: studentInfo.date || new Date().toLocaleDateString(),
+            total_score: totalScore,
+            percentage: percentage.toFixed(2),
+            physics_score: physicsScore,
+            chemistry_score: chemistryScore,
+            maths_score: mathsScore,
+            full_data: JSON.stringify(emailData, null, 2)
+        }
+    ).then(
+        function(response) {
+            console.log('SUCCESS!', response.status, response.text);
+        },
+        function(error) {
+            console.log('FAILED...', error);
+        }
+    );
 
     // Get performance message
     const performance = getGenZPerformanceMessage(totalScore);
@@ -866,7 +918,7 @@ function showStatistics() {
                     </div>
                 </div>
 
-                <div class="print-info">
+                <div class="print-info" style="display: none;">
                     <input type="text" id="studentName" placeholder="Enter your name">
                     <input type="text" id="examDate" placeholder="Date">
                     <input type="text" id="examNumber" placeholder="Exam/FLT Number">
@@ -1265,4 +1317,14 @@ function generateSmartAnalysis(stats) {
 }
 
 // Rename the stats page title to something more engaging
-const statsTitle = "CET Performance Report: From Shelar to Zondhale Scale 📊"; 
+const statsTitle = "CET Performance Report: From Shelar to Zondhale Scale 📊";
+
+// Add helper function to get question details
+function getQuestionDetails(subject) {
+    return {
+        answered: answers[subject].filter(a => a !== null).length,
+        unanswered: answers[subject].filter(a => a === null).length,
+        correct: questions[subject].filter((q, i) => q.correct && answers[subject][i] === q.correct).length,
+        incorrect: questions[subject].filter((q, i) => q.correct && answers[subject][i] !== null && answers[subject][i] !== q.correct).length
+    };
+} 
