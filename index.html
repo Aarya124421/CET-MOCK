@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MHT CET Mock Test</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="light-mode">
+    <div id="intro-page" class="intro-page">
+        <div class="intro-container">
+            <h1>MHT CET Mock Test <span class="emoji">🎯</span></h1>
+            
+            <div class="student-info">
+                <h2>Student Information</h2>
+                <input type="text" id="studentName" placeholder="Enter your name" required>
+                <input type="text" id="examDate" placeholder="Date (DD/MM/YYYY)" required>
+                <input type="text" id="fltNumber" placeholder="FLT Number" required>
+            </div>
+
+            <div class="instructions">
+                <h2>Instructions & Features <span class="emoji">📝</span></h2>
+                <div class="instruction-list">
+                    <p><strong>Test Structure:</strong></p>
+                    <ul>
+                        <li>Physics & Chemistry (1.5 hours) - 50 questions each, 1 mark per question</li>
+                        <li>Mathematics (1.5 hours) - 50 questions, 2 marks per question</li>
+                        <li>Total marks: 200</li>
+                    </ul>
+
+                    <p><strong>Key Features:</strong></p>
+                    <ul>
+                        <li>⌨️ Keyboard shortcuts: 
+                            <ul>
+                                <li>1,2,3,4 - Select options A,B,C,D</li>
+                                <li>Spacebar - Save & Next</li>
+                                <li>M - Mark for Review</li>
+                                <li>← → arrows - Navigate questions</li>
+                            </ul>
+                        </li>
+                        <li>🎨 Question Palette shows progress</li>
+                        <li>🔍 Mark questions for review</li>
+                        <li>⏰ Section-wise timers</li>
+                        <li>🌗 Dark/Light mode available</li>
+                    </ul>
+
+                    <p><strong>Important Notes:</strong></p>
+                    <ul>
+                        <li>Mathematics section unlocks after Physics & Chemistry</li>
+                        <li>15-minute warnings for each section</li>
+                        <li>Detailed performance analysis available after submission</li>
+                    </ul>
+                </div>
+            </div>
+
+            <button id="startTestBtn" class="start-btn">
+                Start Test <span class="emoji">🚀</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>MHT CET Mock Test <span class="emoji">🎯</span></h1>
+                <div class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </div>
+            </div>
+            <div class="timer-container">
+                <div class="section-timer">
+                    <div class="timer-label">Physics & Chemistry</div>
+                    <div class="timer">
+                        <i class="fas fa-clock"></i>
+                        <span id="pc-time">01:30:00</span>
+                    </div>
+                </div>
+                <div class="section-timer">
+                    <div class="timer-label">Mathematics</div>
+                    <div class="timer">
+                        <i class="fas fa-clock"></i>
+                        <span id="math-time">01:30:00</span>
+                    </div>
+                </div>
+                <div class="timer-controls">
+                    <button id="pauseBtn"><i class="fas fa-pause"></i></button>
+                    <button id="playBtn" style="display: none;"><i class="fas fa-play"></i></button>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="test-section">
+                <div class="subject-tabs">
+                    <button class="tab-btn active" data-subject="physics">Physics <span class="emoji">⚡</span></button>
+                    <button class="tab-btn" data-subject="chemistry">Chemistry <span class="emoji">🧪</span></button>
+                    <button class="tab-btn" data-subject="maths" disabled>Mathematics <span class="emoji">📐</span></button>
+                </div>
+
+                <div class="question-container">
+                    <div class="question-header">
+                        <span class="question-number">Question 1</span>
+                        <span class="subject-name"></span>
+                    </div>
+                    <div class="question-content">
+                        <p id="question-text"></p>
+                        <div class="options-container">
+                            <div class="option" data-option="A"></div>
+                            <div class="option" data-option="B"></div>
+                            <div class="option" data-option="C"></div>
+                            <div class="option" data-option="D"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button id="prevBtn" disabled><i class="fas fa-arrow-left"></i> Previous</button>
+                    <button id="saveNextBtn">Save & Next <i class="fas fa-save"></i></button>
+                    <button id="markReviewBtn" class="btn">
+                        <i class="fas fa-flag"></i> Mark for Review
+                    </button>
+                    <button id="clearResponseBtn" class="btn">
+                        <i class="fas fa-eraser"></i> Clear Response
+                    </button>
+                </div>
+            </div>
+
+            <div class="palette-section">
+                <div class="question-palette">
+                    <h3>Question Palette <span class="emoji">🎨</span></h3>
+                    <div class="palette-legend">
+                        <div class="legend-item">
+                            <div class="legend-color answered"></div>
+                            <span>Answered</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color visited"></div>
+                            <span>Not Answered</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color current"></div>
+                            <span>Current</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="palette-item marked"></div>
+                            <span>Marked for Review</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="palette-item marked-answered"></div>
+                            <span>Marked & Answered</span>
+                        </div>
+                    </div>
+                    <div class="palette-grid" id="palette-grid"></div>
+                    <div class="palette-summary">
+                        <div class="summary-item">
+                            <span>Total Questions:</span>
+                            <span>50</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Answered:</span>
+                            <span id="answered-count">0</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Not Answered:</span>
+                            <span id="unanswered-count">50</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Marked for Review:</span>
+                            <span id="marked-count">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="submit-section">
+            <button id="submitBtn" class="submit-btn">Submit Test <span class="emoji">📝</span></button>
+        </div>
+    </div>
+
+    <div class="result-modal" id="resultModal">
+        <div class="modal-content">
+            <h2>Test Results <span class="emoji">🎉</span></h2>
+            <div class="answer-key-section">
+                <h3>Enter Answer Key <span class="emoji">🔑</span></h3>
+                <div class="answer-key-tabs">
+                    <button class="answer-key-tab active" data-subject="physics">Physics</button>
+                    <button class="answer-key-tab" data-subject="chemistry">Chemistry</button>
+                    <button class="answer-key-tab" data-subject="maths">Mathematics</button>
+                </div>
+                <div class="answer-key-grid" id="answer-key-grid"></div>
+                <button id="calculateScoreBtn" class="calculate-score-btn">Calculate Score <span class="emoji">📊</span></button>
+            </div>
+            <div class="score-container" style="display: none;">
+                <div class="score-card">
+                    <h3>Physics <span class="emoji">⚡</span></h3>
+                    <p id="physics-score">0/50</p>
+                </div>
+                <div class="score-card">
+                    <h3>Chemistry <span class="emoji">🧪</span></h3>
+                    <p id="chemistry-score">0/50</p>
+                </div>
+                <div class="score-card">
+                    <h3>Mathematics <span class="emoji">📐</span></h3>
+                    <p id="maths-score">0/100</p>
+                </div>
+            </div>
+            <div class="total-score">
+                <h3>Total Score</h3>
+                <p id="total-score">0/200</p>
+            </div>
+            <div class="performance-message">
+                <p id="performance-text"></p>
+            </div>
+            <button id="closeModal">Close <span class="emoji">👋</span></button>
+            <button id="viewStatsBtn" class="btn">
+                <i class="fas fa-chart-bar"></i> View Detailed Statistics
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html> 
