@@ -732,8 +732,8 @@ function showStatistics() {
 
             <div class="tabs-container">
                 <div class="tabs">
-                    <button class="tab-btn active" data-tab="overview">Overview 📊</button>
-                    <button class="tab-btn" data-tab="incorrect">Incorrect Questions ❌</button>
+                    <button class="tab-btn active" onclick="switchTab('overview')">Overview 📊</button>
+                    <button class="tab-btn" onclick="switchTab('incorrect')">Incorrect Questions ❌</button>
                 </div>
                 
                 <div class="tab-content active" id="overview-tab">
@@ -1078,18 +1078,16 @@ function showStatistics() {
                     }
                 });
 
-                // Add tab switching functionality
-                document.querySelectorAll('.tab-btn').forEach(button => {
-                    button.addEventListener('click', () => {
-                        // Remove active class from all buttons and contents
-                        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-                        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-                        
-                        // Add active class to clicked button and corresponding content
-                        button.classList.add('active');
-                        document.getElementById(button.dataset.tab + '-tab').classList.add('active');
-                    });
-                });
+                // Tab switching function
+                function switchTab(tabName) {
+                    // Remove active class from all buttons and contents
+                    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to clicked button and corresponding content
+                    event.target.classList.add('active');
+                    document.getElementById(tabName + '-tab').classList.add('active');
+                }
             </script>
         </div>
     `;
@@ -2086,4 +2084,4 @@ function getIncorrectQuestions(subject) {
         }
     }
     return incorrectQuestions;
-}     
+}        
