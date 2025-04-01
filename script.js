@@ -2084,4 +2084,237 @@ function getIncorrectQuestions(subject) {
         }
     }
     return incorrectQuestions;
-}        
+}
+
+// Add this after the viewStatsBtn event listener
+document.getElementById('viewIncorrectBtn').addEventListener('click', showIncorrectQuestions);
+
+// Add this new function
+function showIncorrectQuestions() {
+    // Create a new window for incorrect questions
+    const incorrectWindow = window.open('', '_blank');
+    incorrectWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Incorrect Questions Analysis ❌</title>
+            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+            <style>
+                body { 
+                    font-family: 'Poppins', sans-serif; 
+                    padding: 30px;
+                    background: #f5f7ff;
+                    color: #333;
+                    line-height: 1.6;
+                }
+
+                .container { 
+                    max-width: 1200px; 
+                    margin: 0 auto;
+                }
+
+                .header {
+                    text-align: center;
+                    margin-bottom: 40px;
+                }
+
+                .header h1 {
+                    color: #2196F3;
+                    font-size: 2.5em;
+                    margin-bottom: 15px;
+                }
+
+                .student-info {
+                    background: white;
+                    padding: 20px;
+                    border-radius: 15px;
+                    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+                    margin-bottom: 30px;
+                }
+
+                .subject-section {
+                    background: white;
+                    border-radius: 20px;
+                    padding: 25px;
+                    margin-bottom: 30px;
+                    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+                }
+
+                .subject-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 20px;
+                }
+
+                .accuracy-circle {
+                    position: relative;
+                    width: 60px;
+                    height: 60px;
+                }
+
+                .accuracy-circle svg {
+                    transform: rotate(-90deg);
+                }
+
+                .accuracy-circle span {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    font-weight: 600;
+                    color: #2196F3;
+                }
+
+                .incorrect-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                    gap: 20px;
+                }
+
+                .question-card {
+                    background: #f8f9ff;
+                    border-radius: 15px;
+                    padding: 20px;
+                    transition: transform 0.3s ease;
+                }
+
+                .question-card:hover {
+                    transform: translateY(-5px);
+                }
+
+                .question-header {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 15px;
+                    color: #666;
+                }
+
+                .answer-comparison {
+                    display: grid;
+                    gap: 15px;
+                }
+
+                .label {
+                    display: block;
+                    font-size: 0.9em;
+                    color: #666;
+                    margin-bottom: 5px;
+                }
+
+                .answer {
+                    display: inline-block;
+                    padding: 8px 15px;
+                    border-radius: 8px;
+                    font-weight: 600;
+                }
+
+                .answer.wrong {
+                    background: #ffebee;
+                    color: #f44336;
+                }
+
+                .answer.correct {
+                    background: #e8f5e9;
+                    color: #4CAF50;
+                }
+
+                .perfect-score {
+                    text-align: center;
+                    padding: 40px;
+                    background: #f8f9ff;
+                    border-radius: 15px;
+                }
+
+                .perfect-score i {
+                    font-size: 48px;
+                    color: #ffd700;
+                    margin-bottom: 15px;
+                }
+
+                @media (max-width: 768px) {
+                    .incorrect-grid {
+                        grid-template-columns: 1fr;
+                    }
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="header">
+                    <h1>Incorrect Questions Analysis ❌</h1>
+                    <div class="student-info">
+                        <p><strong>Name:</strong> ${studentInfo.name}</p>
+                        <p><strong>Date:</strong> ${studentInfo.date}</p>
+                        <p><strong>FLT Number:</strong> ${studentInfo.fltNumber}</p>
+                    </div>
+                </div>
+
+                ${['physics', 'chemistry', 'maths'].map(subject => {
+                    const incorrect = getIncorrectQuestions(subject);
+                    const totalQuestions = questions[subject].length;
+                    const incorrectPercentage = (incorrect.length / totalQuestions) * 100;
+                    
+                    return `
+                        <div class="subject-section">
+                            <div class="subject-header">
+                                <h2>${subject.charAt(0).toUpperCase() + subject.slice(1)} ⚡</h2>
+                                <div class="accuracy-circle">
+                                    <svg viewBox="0 0 36 36">
+                                        <path d="M18 2.0845
+                                            a 15.9155 15.9155 0 0 1 0 31.831
+                                            a 15.9155 15.9155 0 0 1 0 -31.831"
+                                            fill="none"
+                                            stroke="#eee"
+                                            stroke-width="3"
+                                        />
+                                        <path d="M18 2.0845
+                                            a 15.9155 15.9155 0 0 1 0 31.831
+                                            a 15.9155 15.9155 0 0 1 0 -31.831"
+                                            fill="none"
+                                            stroke="#4CAF50"
+                                            stroke-width="3"
+                                            stroke-dasharray="${100 - incorrectPercentage}, 100"
+                                        />
+                                    </svg>
+                                    <span>${Math.round(100 - incorrectPercentage)}%</span>
+                                </div>
+                            </div>
+                            
+                            ${incorrect.length === 0 ? `
+                                <div class="perfect-score">
+                                    <i class="fas fa-trophy"></i>
+                                    <p>Perfect Score! No incorrect answers! 🎯</p>
+                                </div>
+                            ` : `
+                                <div class="incorrect-grid">
+                                    ${incorrect.map(q => `
+                                        <div class="question-card">
+                                            <div class="question-header">
+                                                <span class="question-number">Q${q.questionNumber}</span>
+                                                <span class="time-spent">${Math.round(q.timeSpent)}s</span>
+                                            </div>
+                                            <div class="answer-comparison">
+                                                <div class="your-answer">
+                                                    <span class="label">Your Answer</span>
+                                                    <span class="answer wrong">${q.userAnswer}</span>
+                                                </div>
+                                                <div class="correct-answer">
+                                                    <span class="label">Correct Answer</span>
+                                                    <span class="answer correct">${q.correctAnswer}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            `}
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+        </body>
+        </html>
+    `);
+    incorrectWindow.document.close();
+} 
