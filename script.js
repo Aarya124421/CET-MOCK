@@ -283,58 +283,161 @@ function updatePaletteSummary() {
 function getGenZPerformanceMessage(totalScore) {
     const percentage = (totalScore / 200) * 100;
     
-    // Expanded set of unique messages per category
+    // Updated messages with diverse Gen-Z humor and shayari
     const messages = {
         excellent: [
-            "Shelar sir calculating your rank: 'AIR 3 ka competition?' 🎯",
-            "Vinod sir ko proud kar diya! Ab unka gussa bhi jhel sakte ho 💪",
-            "3 lakh ka investment turned into IIT dreams! Parents ko party do 💸",
-            "Dombivali se VJTI tak ka safar confirm! Auto wale ko bonus dena 🚕",
-            "Mangesh sir's calculator crashed calculating your score! 🔢",
-            "Zondhale College ne admission deny kar diya, overqualified ho gaye 🎓",
-            "Coaching ke bahar flex karne layak score hai! 📸"
+            "Marks itne ache ki papa ko flex karne ka mauka mil gaya 🫡",
+            "Bhai tu toh next Sharmaji ka beta nikla 📚",
+            "Itne ache marks, JEE wale bhi jealous ho gaye 🎯",
+            "Padhaku nikle, Sharma ji ka beta left the chat 🚀",
+            "Topper ka crown tere sar pe perfect fit 👑",
+            "Bhai ne CET ko personally attack kar diya 💪",
+            "Marks dekh ke calculator bhi confuse ho gaya 🔢",
+            "Tera result dekh ke AI bhi emotional ho gayi 🤖",
+            "Itne marks toh mere crush ke bhi nahi aate 💫",
+            "Bhai tu toh CET ka final boss nikla 🎮",
+            "Marks itne high, SpaceX ne job offer bhej diya 🚀",
+            "Result dekh ke parents ka phone hang ho gaya 📱",
+            "Coaching institutes teri photo frame karenge 🖼️",
+            "Marks dekh ke Zuckerberg ne friend request bheja 💻",
+            "Tera score dekh ke competition ne college change kar liya 🎓"
         ],
         good: [
-            "Dombivali local ki tarah, thoda late par destination pe pahunch gaye 🚂",
-            "Vinod sir ka gussa > tumhare marks < Shelar sir ka expectations 📊",
-            "VJTI ke gate tak pahunche, bas security ne roka hai 🏃",
-            "Auto ka meter: 40 min, Score meter: Not bad! 📈",
-            "Mangesh sir be like: 'IT confirm, CS ke liye pray karo' 🙏",
-            "Zondhale se 10x better, VJTI se thoda neecha 🎯",
-            "3 lakh ka return at least Tier-2 college mein toh milega 💰"
+            "Thoda aur grind karta toh AIR 1 pakka tha 📈",
+            "Not bad, lekin topper ka crown abhi door hai 👑",
+            "Score accha hai, bas thodi consistency ki kami hai 📊",
+            "Potential dikh raha hai, bas execution me thoda gap hai 🎯",
+            "Mid semester tak ka syllabus on point hai 📚",
+            "Decent score, lekin parents ko WhatsApp status pe nahi daal sakte 📱",
+            "Accha hai, par Sharma ji ke bete se competition nahi kar sakte 🏃",
+            "Thoda aur focus karta toh history create ho jati 📖",
+            "Score dekh ke parents ne pizza party cancel kar di 🍕",
+            "Coaching wale motivation speech me tera example nahi denge 🎤",
+            "Instagram pe story daalne layak marks nahi hai 📸",
+            "LinkedIn pe flex karne se pehle thoda aur padh le 💼",
+            "Result accha hai par viral nahi hoga 🌟",
+            "Marks theek hai, bas meme material nahi bana 😅",
+            "Score dekh ke crush ne seen pe chod diya 💔"
         ],
         average: [
-            "Dombivali local miss kar di, ab Kurla local se adjust karna padega 🚉",
-            "Vinod sir ka disappointment face loading... 😤",
-            "VJTI building dikhi par gate tak nahi pahunch paaye 🏫",
-            "3 lakh ka course, 3 rupee ka result 📉",
-            "Mangesh sir's calculator is judging you 🔢",
-            "Zondhale College ne welcome message bhej diya 📱",
-            "Parents ko result batane se pehle job dhoond lo 💼"
+            "Bhai ne CET ko seriously nahi liya 😔",
+            "Tera score dekh ke calculator ne khud ko uninstall kar liya 🔢",
+            "Result itna average, Instagram pe post nahi kar sakte 📱",
+            "Marks dekh ke parents ne WiFi band kar diya 💀",
+            "Score itna low ki calculator ne bhi saath chod diya 🧮",
+            "Coaching wale tujhe motivational story me use karenge 📖",
+            "Marks itne average ki meme bhi nahi ban sakta 🎭",
+            "Result dekh ke tuition teacher ne fees badha di 💰",
+            "Tera score dekh ke competition ko confidence aa gaya 📊",
+            "Parents ko result dikhane se pehle mood check kar lena 😅",
+            "Marks itne low ki calculator ne therapy start kar di 🤕",
+            "Score dekh ke topper ne sympathy message bheja 📩",
+            "Result itna mid, LinkedIn pe mention bhi nahi kar sakte 💼",
+            "Marks dekh ke future self ne message bheja: 'Bro, why?' 🤔",
+            "Score itna average ki AI ne bhi roast kar diya 🤖"
         ],
         needsWork: [
-            "Dombivali se Zondhale tak ka safar confirm! 🎭",
-            "Vinod sir ke gusse se bach gaye, marks hi nahi aaye 😱",
-            "VJTI building Google Maps pe hi dekh sakte ho 🗺️",
-            "3 lakh ka course karke bhi Zondhale level score? 💸",
-            "Mangesh sir ne calculator fenk diya 🧮",
-            "Parents ko result batane se pehle acting classes join karlo 🎭",
-            "Admission form pe Zondhale spelling toh sahi se likh lena 📝"
+            "Bhai tu CET ko vacation samajh liya kya? 🏖️",
+            "Score itna low ki calculator ne counseling suggest ki 📉",
+            "Result dekh ke parents ne OTP block kar diya 🔒",
+            "Marks itne kam ki tuition teacher ne resign kar diya 📝",
+            "Score dekh ke competition ko motivation mil gaya 📊",
+            "Tera result dekh ke books ne khud ko dust kar liya 📚",
+            "Marks itne low ki AI ne condolence message bheja 🤖",
+            "Result dekh ke future self ne number block kar diya 📱",
+            "Score itna disappointing ki meme bhi nahi banega 🎭",
+            "Marks dekh ke parents ne family group se remove kar diya 👥",
+            "Result itna low ki calculator ne therapy join kar li 🧮",
+            "Score dekh ke topper ne pity react bheja 😢",
+            "Marks itne kam ki LinkedIn ne profile hide kar di 💼",
+            "Result dekh ke coaching wale ne fees double kar di 💸",
+            "Score itna low ki ChatGPT ne bhi help deny kar di 🤖"
         ]
     };
 
-    // Function to get random messages without repetition
-    const getRandomMessage = (arr) => {
-        // Shuffle array and take first 2-3 messages
-        const numMessages = Math.floor(Math.random() * 2) + 2; // 2-3 messages
-        const shuffled = [...arr].sort(() => Math.random() - 0.5);
-        return shuffled.slice(0, numMessages).join('\n');
+    // Function to get a single random message
+    const getRandomMessage = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+    // Add motivating shayari based on performance
+    let performanceMessage = '';
+    let emoji = '';
+
+    if (percentage >= 85) {
+        performanceMessage = getRandomMessage(messages.excellent);
+        emoji = "🌟";
+    } else if (percentage >= 70) {
+        performanceMessage = getRandomMessage(messages.good);
+        emoji = "💫";
+    } else if (percentage >= 50) {
+        performanceMessage = getRandomMessage(messages.average);
+        emoji = "🫠";
+    } else {
+        performanceMessage = getRandomMessage(messages.needsWork);
+        emoji = "💪";
+    }
+
+    // Add motivating shayari based on performance
+    const shayari = {
+        excellent: [
+            "Marks itne ache ki calculator bhi proud feel kar raha hai 🔢",
+            "Success ka formula mil gaya hai, ab bas practice karna hai 🧪",
+            "Topper banne ka style hai, marks ka swag hai 🎯",
+            "Zindagi ki raah mein ye score mil gaya, ab toh aur bhi aage badhna hai 🚀",
+            "Kuch log topper banne ke liye paida hote hain, tu unme se ek hai ✨",
+            "Marks dekh ke future bright lag raha hai, aur kya chahiye? 🌟",
+            "Success ka formula: Hard work + Smart work = Perfect score 🎯",
+            "Tera score dekh ke competition ko darr lag raha hai 😎",
+            "Marks itne ache ki parents ko flex karne ka mauka mil gaya 🫡",
+            "Topper banne ka style hai, marks ka swag hai 🎓"
+        ],
+        good: [
+            "Thoda aur grind karo, AIR 1 door nahi hai 📚",
+            "Marks accha hai, bas thoda aur improvement chahiye 💫",
+            "Success ka formula mil gaya hai, ab bas practice karna hai 🚀",
+            "Koshish karne walon ki kabhi haar nahi hoti, bas thoda aur mehnat chahiye 💪",
+            "Marks dekh ke future bright lag raha hai, aur kya chahiye? 🌟",
+            "Success ka formula: Hard work + Smart work = Perfect score 🎯",
+            "Tera score dekh ke competition ko darr lag raha hai 😎",
+            "Marks itne ache ki parents ko flex karne ka mauka mil gaya 🫡",
+            "Topper banne ka style hai, marks ka swag hai 🎓",
+            "Zindagi ki raah mein ye score mil gaya, ab toh aur bhi aage badhna hai 🚀"
+        ],
+        average: [
+            "Koi na, agle attempt mein full marks pakka! Practice makes perfect 🎯",
+            "Mistakes are proof that you're trying! Keep going, next time better hoga 💪",
+            "Every test is a lesson for the next one! Don't give up, you've got this! 📚",
+            "Kuch log topper banne ke liye paida hote hain, tu unme se ek hai ✨",
+            "Marks dekh ke future bright lag raha hai, aur kya chahiye? 🌟",
+            "Success ka formula: Hard work + Smart work = Perfect score 🎯",
+            "Tera score dekh ke competition ko darr lag raha hai 😎",
+            "Marks itne ache ki parents ko flex karne ka mauka mil gaya 🫡",
+            "Topper banne ka style hai, marks ka swag hai 🎓",
+            "Zindagi ki raah mein ye score mil gaya, ab toh aur bhi aage badhna hai 🚀"
+        ],
+        needsWork: [
+            "Koshish karne walon ki kabhi haar nahi hoti, bas thoda aur mehnat chahiye 🎯",
+            "Dil se niklega na mar kar bhi arzoo, toh kya gum hai ki next time perfect score na nikle 💫",
+            "Zindagi ki raah mein koi mushkil nahi aati, jo mann se nikle wo raah bhi mil jati hai ✨",
+            "Kuch log topper banne ke liye paida hote hain, tu unme se ek hai 🌟",
+            "Marks dekh ke future bright lag raha hai, aur kya chahiye? 🎯",
+            "Success ka formula: Hard work + Smart work = Perfect score 💪",
+            "Tera score dekh ke competition ko darr lag raha hai 😎",
+            "Marks itne ache ki parents ko flex karne ka mauka mil gaya 🫡",
+            "Topper banne ka style hai, marks ka swag hai 🎓",
+            "Zindagi ki raah mein ye score mil gaya, ab toh aur bhi aage badhna hai 🚀"
+        ]
     };
 
-    if (percentage >= 85) return { emoji: "🐐", message: getRandomMessage(messages.excellent) };
-    if (percentage >= 70) return { emoji: "💫", message: getRandomMessage(messages.good) };
-    if (percentage >= 50) return { emoji: "🫠", message: getRandomMessage(messages.average) };
-    return { emoji: "💀", message: getRandomMessage(messages.needsWork) };
+    // Get random shayari based on performance level
+    const performanceLevel = percentage >= 85 ? 'excellent' : percentage >= 70 ? 'good' : percentage >= 50 ? 'average' : 'needsWork';
+    const randomShayari = shayari[performanceLevel][Math.floor(Math.random() * shayari[performanceLevel].length)];
+
+    // Return different messages for different sections
+    return {
+        emoji: emoji,
+        performanceMessage: performanceMessage,
+        shayari: randomShayari
+    };
 }
 
 // Answer key input
@@ -350,6 +453,8 @@ function createAnswerKeyGrid() {
         label.textContent = `Q${i + 1}`;
         
         const select = document.createElement('select');
+        select.dataset.subject = currentSubject;
+        select.dataset.question = i;
         select.innerHTML = `
             <option value="">-</option>
             <option value="A">A</option>
@@ -363,52 +468,84 @@ function createAnswerKeyGrid() {
             select.value = questions[currentSubject][i].correct;
         }
         
+        // Add change event listener to save answer immediately
+        select.addEventListener('change', (e) => {
+            const subject = e.target.dataset.subject;
+            const questionIndex = parseInt(e.target.dataset.question);
+            questions[subject][questionIndex].correct = e.target.value;
+        });
+        
         item.appendChild(label);
         item.appendChild(select);
         answerKeyGrid.appendChild(item);
     }
 }
 
-// Score calculation
+// Update answer key tab click handlers
+answerKeyTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        // Save current answers before switching
+        const selects = answerKeyGrid.querySelectorAll('select');
+        selects.forEach(select => {
+            const subject = select.dataset.subject;
+            const questionIndex = parseInt(select.dataset.question);
+            if (subject && questionIndex >= 0) {
+                questions[subject][questionIndex].correct = select.value;
+            }
+        });
+
+        // Switch tabs
+        answerKeyTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        // Create new grid for selected subject
+        createAnswerKeyGrid();
+    });
+});
+
+// Update score calculation
 function calculateScore() {
+    const subjects = ['physics', 'chemistry', 'maths'];
     let scores = {
         physics: 0,
         chemistry: 0,
         maths: 0
     };
     
-    // Calculate scores
-    Object.keys(questions).forEach(subject => {
-        questions[subject].forEach((question, index) => {
-            // Only count if there's a correct answer set
-            if (question.correct) {
-                // Check if user's answer matches the correct answer
-                if (answers[subject][index] === question.correct) {
-                    if (subject === 'maths') {
-                        scores[subject] += 2; // Maths: 2 points per correct answer
-                    } else {
-                        scores[subject] += 1; // Physics and Chemistry: 1 point per correct answer
-                    }
-                }
-                // If answer is wrong or unattempted, no points (already 0)
+    // Calculate scores for all subjects
+    subjects.forEach(subject => {
+        for (let i = 0; i < questions[subject].length; i++) {
+            const userAnswer = answers[subject][i];
+            const correctAnswer = questions[subject][i].correct;
+            
+            // Only count if both user answer and correct answer exist
+            if (userAnswer && correctAnswer && userAnswer === correctAnswer) {
+                // Maths questions are worth 2 points, others worth 1
+                scores[subject] += (subject === 'maths') ? 2 : 1;
             }
-        });
+        }
     });
     
-    const totalScore = Object.values(scores).reduce((a, b) => a + b, 0);
+    const totalScore = scores.physics + scores.chemistry + scores.maths;
     
-    // Update score display
+    // Update score display with detailed breakdown
     document.getElementById('physics-score').textContent = `${scores.physics}/50`;
     document.getElementById('chemistry-score').textContent = `${scores.chemistry}/50`;
     document.getElementById('maths-score').textContent = `${scores.maths}/100`;
     document.getElementById('total-score').textContent = `${totalScore}/200`;
     
-    // Show performance message
+    // Show performance message based on total score
     const performance = getGenZPerformanceMessage(totalScore);
-    performanceText.textContent = performance.message;
+    performanceText.textContent = performance.performanceMessage;
     
     // Show score container
     scoreContainer.style.display = 'grid';
+    
+    return {
+        scores,
+        totalScore,
+        performance
+    };
 }
 
 // Event listeners
@@ -427,29 +564,14 @@ subjectTabs.forEach(tab => {
     });
 });
 
-answerKeyTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-        answerKeyTabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        createAnswerKeyGrid();
-    });
-});
-
 calculateScoreBtn.addEventListener('click', () => {
-    // Get answer key values
-    const currentSubject = document.querySelector('.answer-key-tab.active').dataset.subject;
-    const selects = answerKeyGrid.querySelectorAll('select');
-    selects.forEach((select, index) => {
-        questions[currentSubject][index].correct = select.value;
-    });
-    
     calculateScore();
 });
 
 submitBtn.addEventListener('click', () => {
     if (confirm('Are you sure you want to submit the test? 📝')) {
         resultModal.style.display = 'flex';
-        createAnswerKeyGrid();
+        calculateScore();
     }
 });
 
@@ -971,34 +1093,40 @@ function showStatistics() {
                     </div>
 
                     <div class="stats-card">
-                        <h3><i class="fas fa-flag"></i> Marked for Review Analysis</h3>
+                        <h3><i class="fas fa-chart-pie"></i> Performance Analysis</h3>
                         <div class="review-stats">
                             <table class="stats-table">
                                 <tr>
                                     <th>Subject</th>
-                                    <th>Marked</th>
-                                    <th>Correct</th>
-                                    <th>Accuracy</th>
+                                    <th>Total Accuracy</th>
+                                    <th>Marked Accuracy</th>
+                                    <th>Quick Answers</th>
                                 </tr>
                                 <tr>
                                     <td>Physics ⚡</td>
-                                    <td>${stats.physics.markedCount}</td>
-                                    <td>${stats.physics.markedCorrect}</td>
+                                    <td>${stats.physics.totalAccuracy}%</td>
                                     <td>${stats.physics.markedAccuracy}%</td>
+                                    <td>${stats.physics.quickAnswers}</td>
                                 </tr>
                                 <tr>
                                     <td>Chemistry 🧪</td>
-                                    <td>${stats.chemistry.markedCount}</td>
-                                    <td>${stats.chemistry.markedCorrect}</td>
+                                    <td>${stats.chemistry.totalAccuracy}%</td>
                                     <td>${stats.chemistry.markedAccuracy}%</td>
+                                    <td>${stats.chemistry.quickAnswers}</td>
                                 </tr>
                                 <tr>
                                     <td>Mathematics 📐</td>
-                                    <td>${stats.maths.markedCount}</td>
-                                    <td>${stats.maths.markedCorrect}</td>
+                                    <td>${stats.maths.totalAccuracy}%</td>
                                     <td>${stats.maths.markedAccuracy}%</td>
+                                    <td>${stats.maths.quickAnswers}</td>
                                 </tr>
                             </table>
+                            <div class="accuracy-insights">
+                                <h4>Accuracy Insights</h4>
+                                <ul>
+                                    ${generateAccuracyInsights(stats)}
+                                </ul>
+                            </div>
                         </div>
                     </div>
 
@@ -1033,7 +1161,7 @@ function showStatistics() {
                                 ${performance.emoji}
                             </div>
                             <p>
-                                ${performance.message}
+                                ${performance.shayari}
                             </p>
                         </div>
                     </div>
@@ -1106,11 +1234,14 @@ function showStatistics() {
 // Helper function to calculate subject score
 function calculateSubjectScore(subject) {
     let score = 0;
-    questions[subject].forEach((question, index) => {
-        if (question.correct && answers[subject][index] === question.correct) {
+    for (let i = 0; i < questions[subject].length; i++) {
+        const userAnswer = answers[subject][i];
+        const correctAnswer = questions[subject][i].correct;
+        
+        if (userAnswer && correctAnswer && userAnswer === correctAnswer) {
             score += (subject === 'maths') ? 2 : 1;
         }
-    });
+    }
     return score;
 }
 
@@ -1142,6 +1273,7 @@ function startTest() {
         document.getElementById('intro-page').style.display = 'none';
         startPCTimer();
         loadQuestion();
+        startAutoSave(); // Start auto-saving
     } else {
         alert('Please fill in all the required information! 📝');
     }
@@ -1199,6 +1331,9 @@ function calculateSubjectStats(subject) {
         markedCount: markedForReview[subject].size,
         markedCorrect: 0,
         markedAccuracy: 0,
+        totalCorrect: 0,
+        totalAnswered: 0,
+        totalAccuracy: 0,
         score: 0
     };
 
@@ -1214,6 +1349,20 @@ function calculateSubjectStats(subject) {
     subjectStats.avgTimePerQ = Math.round(subjectStats.totalTime / 50);
     subjectStats.totalTime = Math.round(subjectStats.totalTime / 60); // Convert to minutes
 
+    // Calculate total accuracy
+    questions[subject].forEach((question, index) => {
+        if (answers[subject][index] !== null) {
+            subjectStats.totalAnswered++;
+            if (answers[subject][index] === question.correct) {
+                subjectStats.totalCorrect++;
+                subjectStats.score += (subject === 'maths') ? 2 : 1;
+            }
+        }
+    });
+
+    subjectStats.totalAccuracy = subjectStats.totalAnswered ? 
+        Math.round((subjectStats.totalCorrect / subjectStats.totalAnswered) * 100) : 0;
+
     // Calculate marked questions accuracy
     markedForReview[subject].forEach(qIndex => {
         if (answers[subject][qIndex] === questions[subject][qIndex].correct) {
@@ -1224,66 +1373,107 @@ function calculateSubjectStats(subject) {
     subjectStats.markedAccuracy = subjectStats.markedCount ? 
         Math.round((subjectStats.markedCorrect / subjectStats.markedCount) * 100) : 0;
 
-    // Calculate score
-    questions[subject].forEach((question, index) => {
-        if (question.correct && answers[subject][index] === question.correct) {
-            subjectStats.score += (subject === 'maths') ? 2 : 1;
-        }
-    });
-
     return subjectStats;
 }
 
 function generateGenZRecommendations(stats) {
-    const recommendations = [];
+    const feedback = [];
     
-    const timeManagementJokes = [
-        "Question solve karne mein utna time laga rahe ho jitna Mangesh sir VJTI cutoff explain karne mein lagate hai ⏰",
-        "Time management worse than Vinod sir ka farewell timing 💀",
-        "3 lakh ka course hai, Netflix subscription nahi - itna time waste mat karo 🎬",
-        "Speed itni slow hai, lagta hai Shelar sir ke lectures mein so gaye the 😴"
-    ];
-
-    const subjectSpecificJokes = {
-        physics: [
-            "Physics mein gravity ka law samajh aaya par marks gravity ke saath gir gaye 📉",
-            "Newton ke 3 laws yaad hai par 3 marks bhi nahi aaye 🍎",
-            "Shelar sir ko AIR 3 laane mein physics ne help ki, tumhe fail karane mein bhi physics hi help karegi ⚡"
-        ],
-        chemistry: [
-            "Organic chemistry ne organic farming ki tarah time maang liya 🌱",
-            "Periodic table yaad hai par periodic testing mein fail ho gaye 🧪",
-            "Chemical bonding strong hai par marks se bonding weak hai 🔬"
-        ],
-        maths: [
-            "Integration kar liya par marks aggregate nahi ho rahe 📊",
-            "Probability padhi hai par passing probability calculate karne mein dar lag raha hai 🎲",
-            "Mangesh sir ka VJTI cutoff calculation > tumhara maths calculation 🔢"
-        ]
-    };
-
-    // Add recommendations based on stats with coaching references
+    // Time Management Analysis
     if (stats.overallAvgTime > 120) {
-        recommendations.push(`<li class="warning">${timeManagementJokes[Math.floor(Math.random() * timeManagementJokes.length)]}</li>`);
+        const timeJokes = [
+            `Bhai ${stats.overallAvgTime} seconds per question? IRCTC website bhi itna slow nahi hota 🚂`,
+            `Questions ko aise ghoor rahe ho jaise crush ki last seen timing ko 👀`,
+            `${Math.round(stats.overallAvgTime/60)} minute per question? Maggi bhi itne me ban jati hai yaar 🍜`,
+            `Time management giving tough competition to Internet Explorer legacy 🏃‍♂️`,
+            `Itna time le rahe ho, Zomato wala bhi delivery jaldi kar deta hai 🛵`
+        ];
+        feedback.push(`<li class="warning">${timeJokes[Math.floor(Math.random() * timeJokes.length)]}</li>`);
     }
 
-    ['physics', 'chemistry', 'maths'].forEach(subject => {
-        if (stats[subject].markedAccuracy < 50) {
-            recommendations.push(`<li class="warning">${subjectSpecificJokes[subject][Math.floor(Math.random() * subjectSpecificJokes[subject].length)]}</li>`);
+    // Subject-specific Analysis
+    const subjects = ['physics', 'chemistry', 'maths'];
+    subjects.forEach(subject => {
+        const score = stats[subject].score;
+        const maxScore = subject === 'maths' ? 100 : 50;
+        const percentage = (score / maxScore) * 100;
+
+        // Custom feedback based on subject performance
+        if (percentage < 40) {
+            const lowScoreJokes = {
+                physics: [
+                    `Physics me ${score}/${maxScore}? Newton ke laws of motion ne resignation de diya 🍎`,
+                    `Gravity ne socha marks ko attract karega, par marks to opposite direction me chale gaye 📉`,
+                    `${score} marks me light ko bhi reflection nahi mil raha 🔦`
+                ],
+                chemistry: [
+                    `Chemistry me ${score}/${maxScore}? Periodic table ne block kar diya 🧪`,
+                    `Organic chemistry ne organic farming suggest kar di 🌱`,
+                    `${score} marks dekh ke test tube crack ho gayi 🧫`
+                ],
+                maths: [
+                    `Maths me ${score}/${maxScore}? Calculator ne therapy join kar li 🧮`,
+                    `Integration itna weak hai, area under the curve negative aa gaya 📊`,
+                    `${score} marks? Probability of passing looking sus 📉`
+                ]
+            };
+            feedback.push(`<li class="warning">${lowScoreJokes[subject][Math.floor(Math.random() * 3)]}</li>`);
+        } else if (percentage >= 80) {
+            const highScoreJokes = {
+                physics: [
+                    `Physics me ${score}/${maxScore}! Einstein ne WhatsApp pe congratulations bheja 🎯`,
+                    `Itne ache marks, light ko bhi velocity of light slow lag rahi hai ⚡`,
+                    `${score} marks! Newton ke apple ko competition de diya 🍎`
+                ],
+                chemistry: [
+                    `Chemistry me ${score}/${maxScore}! Mendeleev ne periodic table me tera name add kiya 🧪`,
+                    `Organic chemistry ko inorganic bana diya! ${score} marks ka reaction 🔬`,
+                    `${score} marks! Test tube me party ho rahi hai 🧫`
+                ],
+                maths: [
+                    `Maths me ${score}/${maxScore}! Ramanujan proud feel kar rahe hai 📐`,
+                    `Integration itna strong, continuous function discontinuous ho gaya 📈`,
+                    `${score} marks! Calculator ne standing ovation de di 🧮`
+                ]
+            };
+            feedback.push(`<li class="success">${highScoreJokes[subject][Math.floor(Math.random() * 3)]}</li>`);
+        }
+
+        // Time management per subject
+        if (stats[subject].avgTimePerQ > 150) {
+            feedback.push(`<li class="warning">${subject.charAt(0).toUpperCase() + subject.slice(1)} me ${Math.round(stats[subject].avgTimePerQ)}s per question? ${subject === 'maths' ? 'Calculator' : subject === 'physics' ? 'Newton' : 'Mendeleev'} ne popcorn order kar liya 🍿</li>`);
         }
     });
 
-    // Always add one positive note with coaching reference
-    const positiveNotes = [
-        "Boards ❌ JEE ❌ par CET mein abhi bhi hope hai! 🎯",
-        "3 lakh ka investment hai, return toh leke hi jaana hai! 💪",
-        "Shelar sir ka AIR 3 nahi toh kam se kam passing marks toh le aao 🎓",
-        "VJTI CS na sahi, kuch toh mil hi jayega! 🎲"
+    // Quick answers analysis
+    if (stats.physics.quickAnswers + stats.chemistry.quickAnswers + stats.maths.quickAnswers > 30) {
+        feedback.push(`<li class="warning">Bhai ${stats.physics.quickAnswers + stats.chemistry.quickAnswers + stats.maths.quickAnswers} questions 30 seconds se kam me? Flash ne bhi itni speed se exam nahi diya ⚡</li>`);
+    }
+
+    // Overall performance message
+    const totalScore = stats.physics.score + stats.chemistry.score + stats.maths.score;
+    const totalPercentage = (totalScore / 200) * 100;
+    
+    if (totalPercentage >= 85) {
+        feedback.push(`<li class="success">Overall ${totalScore}/200! Sharma ji ke bete ne tuition join kar li 🎓</li>`);
+    } else if (totalPercentage >= 70) {
+        feedback.push(`<li class="success">Not bad, ${totalScore}/200! Parents ko WhatsApp status material mil gaya 📱</li>`);
+    } else if (totalPercentage >= 50) {
+        feedback.push(`<li class="warning">${totalScore}/200... Parents ko result dikhane se pehle mood check kar lena 😅</li>`);
+    } else {
+        feedback.push(`<li class="warning">${totalScore}/200... Result dekhke parents ne Amazon se books order kar di 📚</li>`);
+    }
+
+    // Add a motivational note at the end
+    const motivationalNotes = [
+        "Koi na, agle attempt me full marks pakka! 💪",
+        "Practice makes perfect, grind continue karo! 🎯",
+        "Mistakes are proof that you're trying! Keep going! 🚀",
+        "Every test is a lesson for the next one! 📚"
     ];
+    feedback.push(`<li class="success">${motivationalNotes[Math.floor(Math.random() * motivationalNotes.length)]}</li>`);
 
-    recommendations.push(`<li class="success">${positiveNotes[Math.floor(Math.random() * positiveNotes.length)]}</li>`);
-
-    return recommendations.join('');
+    return feedback.join('');
 }
 
 // Update the recommendations to be more analytical
@@ -1403,4 +1593,302 @@ function showEmergencyMathWarning() {
         }
         warningModal.remove();
     });
+}
+
+// Add state management functions
+function saveTestState() {
+    const state = {
+        currentSubject,
+        currentQuestionIndex,
+        answers,
+        visitedQuestions: Array.from(visitedQuestions.physics),
+        markedForReview: Array.from(markedForReview.physics),
+        pcTimeLeft,
+        mathTimeLeft,
+        isMathSectionUnlocked,
+        questionStats,
+        studentInfo,
+        isTestStarted: true
+    };
+    localStorage.setItem('cetTestState', JSON.stringify(state));
+}
+
+function restoreTestState() {
+    const savedState = localStorage.getItem('cetTestState');
+    if (savedState) {
+        const state = JSON.parse(savedState);
+        
+        // Restore basic state
+        currentSubject = state.currentSubject;
+        currentQuestionIndex = state.currentQuestionIndex;
+        answers = state.answers;
+        visitedQuestions.physics = new Set(state.visitedQuestions);
+        markedForReview.physics = new Set(state.markedForReview);
+        pcTimeLeft = state.pcTimeLeft;
+        mathTimeLeft = state.mathTimeLeft;
+        isMathSectionUnlocked = state.isMathSectionUnlocked;
+        questionStats = state.questionStats;
+        studentInfo = state.studentInfo;
+        
+        // Update UI
+        if (state.isTestStarted) {
+            document.getElementById('intro-page').style.display = 'none';
+            updatePCTimerDisplay();
+            updateMathTimerDisplay();
+            loadQuestion();
+            
+            // Restart timers
+            if (!isMathSectionUnlocked) {
+                startPCTimer();
+            } else {
+                startMathTimer();
+            }
+            
+            // Update subject tabs
+            subjectTabs.forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.dataset.subject === currentSubject) {
+                    tab.classList.add('active');
+                }
+            });
+            
+            // Enable/disable maths tab based on state
+            const mathsTab = document.querySelector('[data-subject="maths"]');
+            if (mathsTab) {
+                mathsTab.disabled = !isMathSectionUnlocked;
+            }
+        }
+    }
+}
+
+// Add auto-save functionality
+function startAutoSave() {
+    setInterval(saveTestState, 30000); // Save every 30 seconds
+}
+
+// Modify submitTest function
+function submitTest() {
+    if (confirm('Are you sure you want to submit the test? This action cannot be undone.')) {
+        clearInterval(pcTimerInterval);
+        clearInterval(mathTimerInterval);
+        localStorage.removeItem('cetTestState'); // Clear saved state
+        showResultModal();
+    }
+}
+
+// Add event listener for page unload
+window.addEventListener('beforeunload', (e) => {
+    if (document.getElementById('intro-page').style.display === 'none') {
+        saveTestState();
+        e.preventDefault();
+        e.returnValue = '';
+    }
+});
+
+// Call restoreTestState when page loads
+document.addEventListener('DOMContentLoaded', restoreTestState);
+
+// Add restart test functionality
+function restartTest() {
+    if (confirm('⚠️ Warning: This will reset all your progress! Are you sure you want to restart the test?')) {
+        // Reset all state variables
+        currentSubject = 'physics';
+        currentQuestionIndex = 0;
+        answers = {
+            physics: new Array(50).fill(null),
+            chemistry: new Array(50).fill(null),
+            maths: new Array(50).fill(null)
+        };
+        visitedQuestions = {
+            physics: new Set(),
+            chemistry: new Set(),
+            maths: new Set()
+        };
+        markedForReview = {
+            physics: new Set(),
+            chemistry: new Set(),
+            maths: new Set()
+        };
+        pcTimeLeft = 1.5 * 60 * 60;
+        mathTimeLeft = 1.5 * 60 * 60;
+        isMathSectionUnlocked = false;
+        questionStats = {
+            physics: {},
+            chemistry: {},
+            maths: {}
+        };
+
+        // Clear intervals if they exist
+        if (pcTimerInterval) clearInterval(pcTimerInterval);
+        if (mathTimerInterval) clearInterval(mathTimerInterval);
+
+        // Clear localStorage
+        localStorage.removeItem('cetTestState');
+
+        // Reset UI
+        document.getElementById('intro-page').style.display = 'block';
+        document.querySelector('[data-subject="maths"]').disabled = true;
+        document.body.classList.remove('timer-paused');
+        updatePCTimerDisplay();
+        updateMathTimerDisplay();
+        
+        // Enable physics and chemistry tabs
+        document.querySelector('[data-subject="physics"]').disabled = false;
+        document.querySelector('[data-subject="chemistry"]').disabled = false;
+
+        // Switch to physics tab
+        switchSubject('physics');
+        
+        // Show success message
+        alert('Test has been reset successfully! Fill in your details to start again. 🎯');
+    }
+}
+
+// Add restart button to the UI
+const restartBtn = document.createElement('button');
+restartBtn.className = 'restart-btn';
+restartBtn.innerHTML = '<i class="fas fa-redo"></i> Restart Test';
+restartBtn.style.position = 'fixed';
+restartBtn.style.bottom = '20px';
+restartBtn.style.left = '20px';
+restartBtn.style.padding = '10px 20px';
+restartBtn.style.backgroundColor = '#ff4444';
+restartBtn.style.color = 'white';
+restartBtn.style.border = 'none';
+restartBtn.style.borderRadius = '5px';
+restartBtn.style.cursor = 'pointer';
+restartBtn.style.zIndex = '1000';
+restartBtn.style.display = 'flex';
+restartBtn.style.alignItems = 'center';
+restartBtn.style.gap = '8px';
+restartBtn.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)';
+restartBtn.style.transition = 'all 0.3s ease';
+
+// Add hover effect
+restartBtn.addEventListener('mouseenter', () => {
+    restartBtn.style.transform = 'translateY(-2px)';
+    restartBtn.style.boxShadow = '0 4px 8px rgba(0,0,0,0.3)';
+});
+
+restartBtn.addEventListener('mouseleave', () => {
+    restartBtn.style.transform = 'translateY(0)';
+    restartBtn.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)';
+});
+
+// Add click event listener
+restartBtn.addEventListener('click', restartTest);
+
+// Add button to the document
+document.body.appendChild(restartBtn);
+
+// Add new function to generate accuracy insights
+function generateAccuracyInsights(stats) {
+    const insights = [];
+    const subjects = ['physics', 'chemistry', 'maths'];
+    
+    // Overall accuracy analysis
+    const avgAccuracy = (stats.physics.totalAccuracy + stats.chemistry.totalAccuracy + stats.maths.totalAccuracy) / 3;
+    insights.push(`
+        <li class="${avgAccuracy >= 70 ? 'success' : 'warning'}">
+            Overall Accuracy: ${Math.round(avgAccuracy)}% - 
+            ${avgAccuracy >= 70 ? 'Strong performance across subjects' : 'Room for improvement in overall accuracy'}
+        </li>
+    `);
+
+    // Subject-wise detailed analysis
+    subjects.forEach(subject => {
+        const subjectStats = stats[subject];
+        const accuracyDiff = subjectStats.totalAccuracy - subjectStats.markedAccuracy;
+        const quickAnswerRatio = (subjectStats.quickAnswers / 50) * 100;
+        
+        // Subject performance category
+        let performanceCategory = '';
+        if (subjectStats.totalAccuracy >= 80) {
+            performanceCategory = 'Excellent';
+        } else if (subjectStats.totalAccuracy >= 60) {
+            performanceCategory = 'Good';
+        } else if (subjectStats.totalAccuracy >= 40) {
+            performanceCategory = 'Average';
+        } else {
+            performanceCategory = 'Needs Improvement';
+        }
+
+        // Generate subject-specific insights
+        const subjectInsights = [];
+
+        // Performance level insight
+        subjectInsights.push(`
+            <li class="${subjectStats.totalAccuracy >= 60 ? 'success' : 'warning'}">
+                ${subject.charAt(0).toUpperCase() + subject.slice(1)}: ${performanceCategory} performance 
+                (${subjectStats.totalAccuracy}% accuracy)
+            </li>
+        `);
+
+        // Marked vs Unmarked comparison
+        if (Math.abs(accuracyDiff) > 5) {
+            subjectInsights.push(`
+                <li class="${accuracyDiff > 0 ? 'success' : 'warning'}">
+                    ${subject.charAt(0).toUpperCase() + subject.slice(1)}: 
+                    ${accuracyDiff > 0 ? 'Better' : 'Lower'} accuracy in marked questions 
+                    (${Math.abs(accuracyDiff)}% difference)
+                </li>
+            `);
+        }
+
+        // Quick answers analysis
+        if (quickAnswerRatio > 30) {
+            subjectInsights.push(`
+                <li class="warning">
+                    ${subject.charAt(0).toUpperCase() + subject.slice(1)}: 
+                    High number of quick answers (${subjectStats.quickAnswers} questions, ${Math.round(quickAnswerRatio)}%) - 
+                    Consider reviewing these questions
+                </li>
+            `);
+        }
+
+        // Time management insight
+        if (subjectStats.avgTimePerQ > 120) {
+            subjectInsights.push(`
+                <li class="warning">
+                    ${subject.charAt(0).toUpperCase() + subject.slice(1)}: 
+                    High average time per question (${subjectStats.avgTimePerQ}s) - 
+                    Consider improving time management
+                </li>
+            `);
+        }
+
+        // Add subject insights to main insights array
+        insights.push(...subjectInsights);
+    });
+
+    // Cross-subject comparison
+    const bestSubject = subjects.reduce((best, subject) => 
+        stats[subject].totalAccuracy > stats[best].totalAccuracy ? subject : best
+    );
+    const worstSubject = subjects.reduce((worst, subject) => 
+        stats[subject].totalAccuracy < stats[worst].totalAccuracy ? subject : worst
+    );
+
+    if (stats[bestSubject].totalAccuracy - stats[worstSubject].totalAccuracy > 20) {
+        insights.push(`
+            <li class="warning">
+                Significant performance gap between subjects: 
+                ${bestSubject.charAt(0).toUpperCase() + bestSubject.slice(1)} (${stats[bestSubject].totalAccuracy}%) vs 
+                ${worstSubject.charAt(0).toUpperCase() + worstSubject.slice(1)} (${stats[worstSubject].totalAccuracy}%)
+            </li>
+        `);
+    }
+
+    // Add improvement recommendations
+    if (avgAccuracy < 70) {
+        insights.push(`
+            <li class="warning">
+                Areas for Improvement:
+                ${worstSubject.charAt(0).toUpperCase() + worstSubject.slice(1)} needs most attention
+                (${stats[worstSubject].totalAccuracy}% accuracy)
+            </li>
+        `);
+    }
+
+    return insights.join('');
 } 
