@@ -653,6 +653,69 @@ function showStatistics() {
         overallAvgTime: overallAvgTime
     };
 
+    // Prepare data for email
+    const emailData = {
+        studentInfo: {
+            name: studentInfo.name,
+            date: studentInfo.date,
+            fltNumber: studentInfo.fltNumber,
+            testDate: new Date().toLocaleString()
+        },
+        scores: {
+            physics: physicsScore,
+            chemistry: chemistryScore,
+            maths: mathsScore,
+            total: totalScore,
+            percentage: percentage
+        },
+        subjectStats: {
+            physics: physicsStats,
+            chemistry: chemistryStats,
+            maths: mathsStats
+        },
+        questionDetails: {
+            physics: getQuestionDetails('physics'),
+            chemistry: getQuestionDetails('chemistry'),
+            maths: getQuestionDetails('maths')
+        },
+        timeManagement: {
+            physicsChemistryTime: 5400 - pcTimeLeft,
+            mathsTime: 5400 - mathTimeLeft,
+            questionStats: questionStats
+        },
+        reviewedQuestions: {
+            physics: Array.from(markedForReview.physics),
+            chemistry: Array.from(markedForReview.chemistry),
+            maths: Array.from(markedForReview.maths)
+        }
+    };
+
+    // Send data using a more reliable method
+    const sendData = async () => {
+        try {
+            const response = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    access_key: '6ed127bc-0814-43ab-af25-6870098f2cb7',
+                    name: studentInfo.name || 'Student',
+                    flt_number: studentInfo.fltNumber || 'Not provided',
+                    total_score: `${totalScore}/200 (${percentage.toFixed(1)}%)`,
+                    subject_scores: `Physics: ${physicsScore}/50, Chemistry: ${chemistryScore}/50, Maths: ${mathsScore}/100`,
+                    data: emailData
+                })
+            });
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
+    // Send the data
+    sendData();
+
     // Get performance message
     const performance = getGenZPerformanceMessage(totalScore);
 
@@ -668,179 +731,368 @@ function showStatistics() {
                 </div>
             </div>
 
-            <div class="charts-grid">
-                <div class="chart-container">
-                    <canvas id="subjectScores"></canvas>
+            <div class="tabs-container">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="overview">Overview 📊</button>
+                    <button class="tab-btn" data-tab="incorrect">Incorrect Questions ❌</button>
                 </div>
-                <div class="chart-container">
-                    <canvas id="timeDistribution"></canvas>
-                </div>
-            </div>
-
-            <div class="stats-grid">
-                <div class="stats-card">
-                    <h3><i class="fas fa-clock"></i> Time Analysis</h3>
-                    <div class="time-analysis">
-                        <table class="stats-table">
-                            <tr>
-                                <th>Subject</th>
-                                <th>Avg Time/Q</th>
-                                <th>Total Time</th>
-                                <th>Quick Ans (<30s)</th>
-                            </tr>
-                            <tr>
-                                <td>Physics ⚡</td>
-                                <td>${stats.physics.avgTimePerQ}s</td>
-                                <td>${stats.physics.totalTime}m</td>
-                                <td>${stats.physics.quickAnswers}</td>
-                            </tr>
-                            <tr>
-                                <td>Chemistry 🧪</td>
-                                <td>${stats.chemistry.avgTimePerQ}s</td>
-                                <td>${stats.chemistry.totalTime}m</td>
-                                <td>${stats.chemistry.quickAnswers}</td>
-                            </tr>
-                            <tr>
-                                <td>Mathematics 📐</td>
-                                <td>${stats.maths.avgTimePerQ}s</td>
-                                <td>${stats.maths.totalTime}m</td>
-                                <td>${stats.maths.quickAnswers}</td>
-                            </tr>
-                        </table>
+                
+                <div class="tab-content active" id="overview-tab">
+                    <div class="charts-grid">
+                        <div class="chart-container">
+                            <canvas id="subjectScores"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="timeDistribution"></canvas>
+                        </div>
                     </div>
-                </div>
 
-                <div class="stats-card">
-                    <h3><i class="fas fa-chart-pie"></i> Performance Analysis</h3>
-                    <div class="review-stats">
-                        <table class="stats-table">
-                            <tr>
-                                <th>Subject</th>
-                                <th>Total Accuracy</th>
-                                <th>Marked Accuracy</th>
-                                <th>Quick Answers</th>
-                            </tr>
-                            <tr>
-                                <td>Physics ⚡</td>
-                                <td>${stats.physics.totalAccuracy}%</td>
-                                <td>${stats.physics.markedAccuracy}%</td>
-                                <td>${stats.physics.quickAnswers}</td>
-                            </tr>
-                            <tr>
-                                <td>Chemistry 🧪</td>
-                                <td>${stats.chemistry.totalAccuracy}%</td>
-                                <td>${stats.chemistry.markedAccuracy}%</td>
-                                <td>${stats.chemistry.quickAnswers}</td>
-                            </tr>
-                            <tr>
-                                <td>Mathematics 📐</td>
-                                <td>${stats.maths.totalAccuracy}%</td>
-                                <td>${stats.maths.markedAccuracy}%</td>
-                                <td>${stats.maths.quickAnswers}</td>
-                            </tr>
-                        </table>
-                        <div class="accuracy-insights">
-                            <h4>Accuracy Insights</h4>
-                            <ul>
-                                ${generateAccuracyInsights(stats)}
-                            </ul>
+                    <div class="stats-grid">
+                        <div class="stats-card">
+                            <h3><i class="fas fa-clock"></i> Time Analysis</h3>
+                            <div class="time-analysis">
+                                <table class="stats-table">
+                                    <tr>
+                                        <th>Subject</th>
+                                        <th>Avg Time/Q</th>
+                                        <th>Total Time</th>
+                                        <th>Quick Ans (<30s)</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Physics ⚡</td>
+                                        <td>${stats.physics.avgTimePerQ}s</td>
+                                        <td>${stats.physics.totalTime}m</td>
+                                        <td>${stats.physics.quickAnswers}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Chemistry 🧪</td>
+                                        <td>${stats.chemistry.avgTimePerQ}s</td>
+                                        <td>${stats.chemistry.totalTime}m</td>
+                                        <td>${stats.chemistry.quickAnswers}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mathematics 📐</td>
+                                        <td>${stats.maths.avgTimePerQ}s</td>
+                                        <td>${stats.maths.totalTime}m</td>
+                                        <td>${stats.maths.quickAnswers}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="stats-card">
+                            <h3><i class="fas fa-chart-pie"></i> Performance Analysis</h3>
+                            <div class="review-stats">
+                                <table class="stats-table">
+                                    <tr>
+                                        <th>Subject</th>
+                                        <th>Total Accuracy</th>
+                                        <th>Marked Accuracy</th>
+                                        <th>Quick Answers</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Physics ⚡</td>
+                                        <td>${stats.physics.totalAccuracy}%</td>
+                                        <td>${stats.physics.markedAccuracy}%</td>
+                                        <td>${stats.physics.quickAnswers}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Chemistry 🧪</td>
+                                        <td>${stats.chemistry.totalAccuracy}%</td>
+                                        <td>${stats.chemistry.markedAccuracy}%</td>
+                                        <td>${stats.chemistry.quickAnswers}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mathematics 📐</td>
+                                        <td>${stats.maths.totalAccuracy}%</td>
+                                        <td>${stats.maths.markedAccuracy}%</td>
+                                        <td>${stats.maths.quickAnswers}</td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="stats-card">
-                    <h3><i class="fas fa-chart-line"></i> Performance Insights</h3>
-                    <ul>
-                        ${generateSmartAnalysis(stats)}
-                    </ul>
-                </div>
-
-                <div class="stats-card">
-                    <h3><i class="fas fa-lightbulb"></i> Recommendations</h3>
-                    <ul>
-                        ${generateGenZRecommendations(stats)}
-                    </ul>
-                </div>
-            </div>
-
-            <div class="performance-card">
-                <h2>Overall Performance ${percentage >= 85 ? "🔥" : percentage >= 70 ? "💫" : percentage >= 50 ? "💪" : "📚"}</h2>
-                <div class="performance-details">
-                    <div class="score-summary">
-                        <h3>Score Breakdown</h3>
-                        <p>Physics: ${physicsScore}/50 ${physicsScore >= 40 ? "🎯" : "📈"}</p>
-                        <p>Chemistry: ${chemistryScore}/50 ${chemistryScore >= 40 ? "⚗️" : "🧪"}</p>
-                        <p>Mathematics: ${mathsScore}/100 ${mathsScore >= 80 ? "🎲" : "📊"}</p>
-                        <h4>Total: ${totalScore}/200 (${percentage.toFixed(1)}%)</h4>
+                <div class="tab-content" id="incorrect-tab">
+                    <div class="incorrect-analysis">
+                        ${['physics', 'chemistry', 'maths'].map(subject => {
+                            const incorrect = getIncorrectQuestions(subject);
+                            const totalQuestions = questions[subject].length;
+                            const incorrectPercentage = (incorrect.length / totalQuestions) * 100;
+                            
+                            return `
+                                <div class="subject-analysis-card">
+                                    <div class="subject-header">
+                                        <h3>${subject.charAt(0).toUpperCase() + subject.slice(1)} ⚡</h3>
+                                        <div class="accuracy-circle">
+                                            <svg viewBox="0 0 36 36">
+                                                <path d="M18 2.0845
+                                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                                                    fill="none"
+                                                    stroke="#eee"
+                                                    stroke-width="3"
+                                                />
+                                                <path d="M18 2.0845
+                                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                                                    fill="none"
+                                                    stroke="#4CAF50"
+                                                    stroke-width="3"
+                                                    stroke-dasharray="${100 - incorrectPercentage}, 100"
+                                                />
+                                            </svg>
+                                            <span>${Math.round(100 - incorrectPercentage)}%</span>
+                                        </div>
+                                    </div>
+                                    
+                                    ${incorrect.length === 0 ? `
+                                        <div class="perfect-score">
+                                            <i class="fas fa-trophy"></i>
+                                            <p>Perfect Score! No incorrect answers! 🎯</p>
+                                        </div>
+                                    ` : `
+                                        <div class="incorrect-grid">
+                                            ${incorrect.map(q => `
+                                                <div class="incorrect-question-card">
+                                                    <div class="question-header">
+                                                        <span class="question-number">Q${q.questionNumber}</span>
+                                                        <span class="time-spent">${Math.round(q.timeSpent)}s</span>
+                                                    </div>
+                                                    <div class="answer-comparison">
+                                                        <div class="your-answer">
+                                                            <span class="label">Your Answer</span>
+                                                            <span class="answer wrong">${q.userAnswer}</span>
+                                                        </div>
+                                                        <div class="correct-answer">
+                                                            <span class="label">Correct Answer</span>
+                                                            <span class="answer correct">${q.correctAnswer}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            `).join('')}
+                                        </div>
+                                    `}
+                                </div>
+                            `;
+                        }).join('')}
                     </div>
-                    
-                    <div class="performance-message">
-                        <div class="emoji-rating">
-                            ${performance.report.emoji}
-                        </div>
-                        <p>
-                            ${performance.report.message}
-                        </p>
-                    </div>
                 </div>
             </div>
 
-            <div class="no-print" style="text-align: center; margin-top: 20px;">
-                <button class="btn" onclick="window.print()">
-                    <i class="fas fa-print"></i> Print Report
-                </button>
-            </div>
+            <style>
+                .tabs-container {
+                    margin-top: 30px;
+                }
+
+                .tabs {
+                    display: flex;
+                    gap: 20px;
+                    margin-bottom: 30px;
+                    border-bottom: 2px solid #eee;
+                    padding-bottom: 10px;
+                }
+
+                .tab-btn {
+                    padding: 12px 24px;
+                    border: none;
+                    background: none;
+                    font-size: 1.1em;
+                    cursor: pointer;
+                    color: #666;
+                    transition: all 0.3s ease;
+                    border-radius: 8px;
+                }
+
+                .tab-btn.active {
+                    color: var(--primary);
+                    background: #e3f2fd;
+                    font-weight: 600;
+                }
+
+                .tab-content {
+                    display: none;
+                }
+
+                .tab-content.active {
+                    display: block;
+                }
+
+                .incorrect-analysis {
+                    display: grid;
+                    gap: 30px;
+                }
+
+                .subject-analysis-card {
+                    background: white;
+                    border-radius: 20px;
+                    padding: 25px;
+                    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+                }
+
+                .subject-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 20px;
+                }
+
+                .accuracy-circle {
+                    position: relative;
+                    width: 60px;
+                    height: 60px;
+                }
+
+                .accuracy-circle svg {
+                    transform: rotate(-90deg);
+                }
+
+                .accuracy-circle span {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    font-weight: 600;
+                    color: var(--primary);
+                }
+
+                .perfect-score {
+                    text-align: center;
+                    padding: 40px;
+                    background: #f8f9ff;
+                    border-radius: 15px;
+                }
+
+                .perfect-score i {
+                    font-size: 48px;
+                    color: #ffd700;
+                    margin-bottom: 15px;
+                }
+
+                .incorrect-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                    gap: 20px;
+                }
+
+                .incorrect-question-card {
+                    background: #f8f9ff;
+                    border-radius: 15px;
+                    padding: 20px;
+                    transition: transform 0.3s ease;
+                }
+
+                .incorrect-question-card:hover {
+                    transform: translateY(-5px);
+                }
+
+                .question-header {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 15px;
+                    color: #666;
+                }
+
+                .answer-comparison {
+                    display: grid;
+                    gap: 15px;
+                }
+
+                .label {
+                    display: block;
+                    font-size: 0.9em;
+                    color: #666;
+                    margin-bottom: 5px;
+                }
+
+                .answer {
+                    display: inline-block;
+                    padding: 8px 15px;
+                    border-radius: 8px;
+                    font-weight: 600;
+                }
+
+                .answer.wrong {
+                    background: #ffebee;
+                    color: #f44336;
+                }
+
+                .answer.correct {
+                    background: #e8f5e9;
+                    color: #4CAF50;
+                }
+
+                @media (max-width: 768px) {
+                    .incorrect-grid {
+                        grid-template-columns: 1fr;
+                    }
+                }
+            </style>
+
+            <script>
+                // Subject Scores Chart
+                new Chart(document.getElementById('subjectScores'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['Physics ⚡', 'Chemistry 🧪', 'Mathematics 📐'],
+                        datasets: [{
+                            label: 'Score',
+                            data: [${physicsScore}, ${chemistryScore}, ${mathsScore}],
+                            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Subject-wise Scores 📊'
+                            }
+                        }
+                    }
+                });
+
+                // Time Distribution Chart
+                new Chart(document.getElementById('timeDistribution'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Physics ⚡', 'Chemistry 🧪', 'Mathematics 📐'],
+                        datasets: [{
+                            data: [
+                                ${stats.physics.totalTime},
+                                ${stats.chemistry.totalTime},
+                                ${stats.maths.totalTime}
+                            ],
+                            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Time Distribution ⏰'
+                            }
+                        }
+                    }
+                });
+
+                // Add tab switching functionality
+                document.querySelectorAll('.tab-btn').forEach(button => {
+                    button.addEventListener('click', () => {
+                        // Remove active class from all buttons and contents
+                        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+                        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                        
+                        // Add active class to clicked button and corresponding content
+                        button.classList.add('active');
+                        document.getElementById(button.dataset.tab + '-tab').classList.add('active');
+                    });
+                });
+            </script>
         </div>
-
-        <script>
-            // Subject Scores Chart
-            new Chart(document.getElementById('subjectScores'), {
-                type: 'bar',
-                data: {
-                    labels: ['Physics ⚡', 'Chemistry 🧪', 'Mathematics 📐'],
-                    datasets: [{
-                        label: 'Score',
-                        data: [${physicsScore}, ${chemistryScore}, ${mathsScore}],
-                        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Subject-wise Scores 📊'
-                        }
-                    }
-                }
-            });
-
-            // Time Distribution Chart
-            new Chart(document.getElementById('timeDistribution'), {
-                type: 'doughnut',
-                data: {
-                    labels: ['Physics ⚡', 'Chemistry 🧪', 'Mathematics 📐'],
-                    datasets: [{
-                        data: [
-                            ${stats.physics.totalTime},
-                            ${stats.chemistry.totalTime},
-                            ${stats.maths.totalTime}
-                        ],
-                        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Time Distribution ⏰'
-                        }
-                    }
-                }
-            });
-        </script>
     `;
 
     // Create a new window and write the HTML
@@ -1099,6 +1351,52 @@ function showStatistics() {
                     .print-info {
                         display: block;
                     }
+                }
+
+                .incorrect-questions {
+                    margin-top: 20px;
+                }
+
+                .subject-section {
+                    margin-bottom: 25px;
+                    padding: 15px;
+                    background: #f8f9ff;
+                    border-radius: 10px;
+                }
+
+                .subject-section h4 {
+                    color: var(--primary);
+                    margin-bottom: 15px;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                }
+
+                .subject-section ul {
+                    list-style: none;
+                    padding: 0;
+                }
+
+                .subject-section li {
+                    padding: 10px;
+                    margin: 5px 0;
+                    background: white;
+                    border-radius: 8px;
+                    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    flex-wrap: wrap;
+                }
+
+                .subject-section li:hover {
+                    transform: translateX(5px);
+                    transition: transform 0.3s ease;
+                }
+
+                .success {
+                    color: var(--success);
+                    font-weight: 500;
                 }
             </style>
         </head>
@@ -1770,4 +2068,23 @@ function generateAccuracyInsights(stats) {
     }
 
     return insights.join('');
+}
+
+// Add this function to get incorrect questions
+function getIncorrectQuestions(subject) {
+    const incorrectQuestions = [];
+    for (let i = 0; i < questions[subject].length; i++) {
+        const userAnswer = answers[subject][i];
+        const correctAnswer = questions[subject][i].correct;
+        
+        if (userAnswer && correctAnswer && userAnswer !== correctAnswer) {
+            incorrectQuestions.push({
+                questionNumber: i + 1,
+                userAnswer: userAnswer,
+                correctAnswer: correctAnswer,
+                timeSpent: questionStats[subject][i]?.timeSpent || 0
+            });
+        }
+    }
+    return incorrectQuestions;
 } 
