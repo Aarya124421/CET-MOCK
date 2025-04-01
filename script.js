@@ -514,15 +514,6 @@ calculateScoreBtn.addEventListener('click', () => {
 submitBtn.addEventListener('click', () => {
     if (confirm('Are you sure you want to submit the test? 📝')) {
         resultModal.style.display = 'flex';
-        // Set physics tab as active and create the grid
-        answerKeyTabs.forEach(tab => {
-            if (tab.dataset.subject === 'physics') {
-                tab.classList.add('active');
-            } else {
-                tab.classList.remove('active');
-            }
-        });
-        createAnswerKeyGrid(); // Create the grid immediately
         calculateScore();
     }
 });
@@ -699,21 +690,31 @@ function showStatistics() {
         }
     };
 
-    // Send data using fetch in the background
-    fetch('https://formspree.io/f/mgvaljjz', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-            name: studentInfo.name || 'Student',
-            flt_number: studentInfo.fltNumber || 'Not provided',
-            total_score: `${totalScore}/200 (${percentage.toFixed(1)}%)`,
-            subject_scores: `Physics: ${physicsScore}/50, Chemistry: ${chemistryScore}/50, Maths: ${mathsScore}/100`,
-            data: emailData
-        })
-    }).catch(error => console.error('Error:', error));
+    // Send data using a more reliable method
+    const sendData = async () => {
+        try {
+            const response = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    access_key: '6ed127bc-0814-43ab-af25-6870098f2cb7',
+                    name: studentInfo.name || 'Student',
+                    flt_number: studentInfo.fltNumber || 'Not provided',
+                    total_score: `${totalScore}/200 (${percentage.toFixed(1)}%)`,
+                    subject_scores: `Physics: ${physicsScore}/50, Chemistry: ${chemistryScore}/50, Maths: ${mathsScore}/100`,
+                    data: emailData
+                })
+            });
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
+    // Send the data
+    sendData();
 
     // Get performance message
     const performance = getGenZPerformanceMessage(totalScore);
@@ -1832,4 +1833,4 @@ function generateAccuracyInsights(stats) {
     }
 
     return insights.join('');
-}  
+}     
