@@ -280,163 +280,87 @@ function updatePaletteSummary() {
 }
 
 // Performance messages
-function getGenZPerformanceMessage(totalScore) {
-    const percentage = (totalScore / 200) * 100;
-    
-    // Updated messages with diverse Gen-Z humor and shayari
+function getGenZPerformanceMessage(score) {
     const messages = {
         excellent: [
+            "Marks itne ache ki ChatGPT bhi jealous ho gaya 🤖",
             "Marks itne ache ki papa ko flex karne ka mauka mil gaya 🫡",
-            "Bhai tu toh next Sharmaji ka beta nikla 📚",
-            "Itne ache marks, JEE wale bhi jealous ho gaye 🎯",
-            "Padhaku nikle, Sharma ji ka beta left the chat 🚀",
-            "Topper ka crown tere sar pe perfect fit 👑",
-            "Bhai ne CET ko personally attack kar diya 💪",
-            "Marks dekh ke calculator bhi confuse ho gaya 🔢",
-            "Tera result dekh ke AI bhi emotional ho gayi 🤖",
-            "Itne marks toh mere crush ke bhi nahi aate 💫",
-            "Bhai tu toh CET ka final boss nikla 🎮",
-            "Marks itne high, SpaceX ne job offer bhej diya 🚀",
-            "Result dekh ke parents ka phone hang ho gaya 📱",
-            "Coaching institutes teri photo frame karenge 🖼️",
-            "Marks dekh ke Zuckerberg ne friend request bheja 💻",
-            "Tera score dekh ke competition ne college change kar liya 🎓"
+            "Marks itne ache ki coaching wale bhi jealous ho gaye 🎯",
+            "Marks itne ache ki future bright lag raha hai ✨",
+            "Marks itne ache ki confidence level sigma male jaisa hai 🗿"
         ],
         good: [
-            "Thoda aur grind karta toh AIR 1 pakka tha 📈",
-            "Not bad, lekin topper ka crown abhi door hai 👑",
-            "Score accha hai, bas thodi consistency ki kami hai 📊",
-            "Potential dikh raha hai, bas execution me thoda gap hai 🎯",
-            "Mid semester tak ka syllabus on point hai 📚",
-            "Decent score, lekin parents ko WhatsApp status pe nahi daal sakte 📱",
-            "Accha hai, par Sharma ji ke bete se competition nahi kar sakte 🏃",
-            "Thoda aur focus karta toh history create ho jati 📖",
-            "Score dekh ke parents ne pizza party cancel kar di 🍕",
-            "Coaching wale motivation speech me tera example nahi denge 🎤",
-            "Instagram pe story daalne layak marks nahi hai 📸",
-            "LinkedIn pe flex karne se pehle thoda aur padh le 💼",
-            "Result accha hai par viral nahi hoga 🌟",
-            "Marks theek hai, bas meme material nahi bana 😅",
-            "Score dekh ke crush ne seen pe chod diya 💔"
+            "Marks accha hai, bas thoda aur grind karna padega 💪",
+            "Marks accha hai, lekin potential aur hai 🚀",
+            "Marks accha hai, ab aur better karna hai 🎯",
+            "Marks accha hai, bas thoda aur push karna hai 💫",
+            "Marks accha hai, lekin perfect nahi hai 🎯"
         ],
         average: [
-            "Bhai ne CET ko seriously nahi liya 😔",
-            "Tera score dekh ke calculator ne khud ko uninstall kar liya 🔢",
-            "Result itna average, Instagram pe post nahi kar sakte 📱",
-            "Marks dekh ke parents ne WiFi band kar diya 💀",
-            "Score itna low ki calculator ne bhi saath chod diya 🧮",
-            "Coaching wale tujhe motivational story me use karenge 📖",
-            "Marks itne average ki meme bhi nahi ban sakta 🎭",
-            "Result dekh ke tuition teacher ne fees badha di 💰",
-            "Tera score dekh ke competition ko confidence aa gaya 📊",
-            "Parents ko result dikhane se pehle mood check kar lena 😅",
-            "Marks itne low ki calculator ne therapy start kar di 🤕",
-            "Score dekh ke topper ne sympathy message bheja 📩",
-            "Result itna mid, LinkedIn pe mention bhi nahi kar sakte 💼",
-            "Marks dekh ke future self ne message bheja: 'Bro, why?' 🤔",
-            "Score itna average ki AI ne bhi roast kar diya 🤖"
+            "Marks itna kam ki coaching wale bhi dukhi ho gaye 😅",
+            "Marks itna kam ki future ka plan change karna padega 🤔",
+            "Marks itna kam ki papa ko flex karne ka mauka nahi mila 😅",
+            "Marks itna kam ki coaching wale bhi dukhi ho gaye 😅",
+            "Marks itna kam ki future ka plan change karna padega 🤔"
         ],
         needsWork: [
-            "Bhai tu CET ko vacation samajh liya kya? 🏖️",
-            "Score itna low ki calculator ne counseling suggest ki 📉",
-            "Result dekh ke parents ne OTP block kar diya 🔒",
-            "Marks itne kam ki tuition teacher ne resign kar diya 📝",
-            "Score dekh ke competition ko motivation mil gaya 📊",
-            "Tera result dekh ke books ne khud ko dust kar liya 📚",
-            "Marks itne low ki AI ne condolence message bheja 🤖",
-            "Result dekh ke future self ne number block kar diya 📱",
-            "Score itna disappointing ki meme bhi nahi banega 🎭",
-            "Marks dekh ke parents ne family group se remove kar diya 👥",
-            "Result itna low ki calculator ne therapy join kar li 🧮",
-            "Score dekh ke topper ne pity react bheja 😢",
-            "Marks itne kam ki LinkedIn ne profile hide kar di 💼",
-            "Result dekh ke coaching wale ne fees double kar di 💸",
-            "Score itna low ki ChatGPT ne bhi help deny kar di 🤖"
+            "Marks itne kam ki coaching wale bhi dukhi ho gaye 😅",
+            "Marks itne kam ki future ka plan change karna padega 🤔",
+            "Marks itne kam ki papa ko flex karne ka mauka nahi mila 😅",
+            "Marks itne kam ki coaching wale bhi dukhi ho gaye 😅",
+            "Marks itne kam ki future ka plan change karna padega 🤔"
         ]
     };
 
-    // Function to get a single random message
-    const getRandomMessage = (arr) => arr[Math.floor(Math.random() * arr.length)];
-
-    // Add motivating shayari based on performance
-    let performanceMessage = '';
-    let emoji = '';
-
-    if (percentage >= 85) {
-        performanceMessage = getRandomMessage(messages.excellent);
-        emoji = "🌟";
-    } else if (percentage >= 70) {
-        performanceMessage = getRandomMessage(messages.good);
-        emoji = "💫";
-    } else if (percentage >= 50) {
-        performanceMessage = getRandomMessage(messages.average);
-        emoji = "🫠";
-    } else {
-        performanceMessage = getRandomMessage(messages.needsWork);
-        emoji = "💪";
-    }
-
-    // Add motivating shayari based on performance
+    // Add funny motivating shayari
     const shayari = {
         excellent: [
-            "Marks itne ache ki calculator bhi proud feel kar raha hai 🔢",
-            "Success ka formula mil gaya hai, ab bas practice karna hai 🧪",
-            "Topper banne ka style hai, marks ka swag hai 🎯",
-            "Zindagi ki raah mein ye score mil gaya, ab toh aur bhi aage badhna hai 🚀",
-            "Kuch log topper banne ke liye paida hote hain, tu unme se ek hai ✨",
-            "Marks dekh ke future bright lag raha hai, aur kya chahiye? 🌟",
-            "Success ka formula: Hard work + Smart work = Perfect score 🎯",
-            "Tera score dekh ke competition ko darr lag raha hai 😎",
-            "Marks itne ache ki parents ko flex karne ka mauka mil gaya 🫡",
-            "Topper banne ka style hai, marks ka swag hai 🎓"
+            "Marks ki chamak chamak, future ki damak damak ✨",
+            "Success ki raah mein, marks ki chaah mein 🎯",
+            "Marks ki dhoom mach gayi, future ki khoom mach gayi 🚀",
+            "Marks ki chamak chamak, future ki damak damak ✨",
+            "Success ki raah mein, marks ki chaah mein 🎯"
         ],
         good: [
-            "Thoda aur grind karo, AIR 1 door nahi hai 📚",
-            "Marks accha hai, bas thoda aur improvement chahiye 💫",
-            "Success ka formula mil gaya hai, ab bas practice karna hai 🚀",
-            "Koshish karne walon ki kabhi haar nahi hoti, bas thoda aur mehnat chahiye 💪",
-            "Marks dekh ke future bright lag raha hai, aur kya chahiye? 🌟",
-            "Success ka formula: Hard work + Smart work = Perfect score 🎯",
-            "Tera score dekh ke competition ko darr lag raha hai 😎",
-            "Marks itne ache ki parents ko flex karne ka mauka mil gaya 🫡",
-            "Topper banne ka style hai, marks ka swag hai 🎓",
-            "Zindagi ki raah mein ye score mil gaya, ab toh aur bhi aage badhna hai 🚀"
+            "Thoda aur mehnat, thoda aur success 🎯",
+            "Marks ki raah mein, success ki chaah mein 💫",
+            "Thoda aur push, thoda aur rush 🚀",
+            "Marks ki raah mein, success ki chaah mein 💫",
+            "Thoda aur mehnat, thoda aur success 🎯"
         ],
         average: [
-            "Koi na, agle attempt mein full marks pakka! Practice makes perfect 🎯",
-            "Mistakes are proof that you're trying! Keep going, next time better hoga 💪",
-            "Every test is a lesson for the next one! Don't give up, you've got this! 📚",
-            "Kuch log topper banne ke liye paida hote hain, tu unme se ek hai ✨",
-            "Marks dekh ke future bright lag raha hai, aur kya chahiye? 🌟",
-            "Success ka formula: Hard work + Smart work = Perfect score 🎯",
-            "Tera score dekh ke competition ko darr lag raha hai 😎",
-            "Marks itne ache ki parents ko flex karne ka mauka mil gaya 🫡",
-            "Topper banne ka style hai, marks ka swag hai 🎓",
-            "Zindagi ki raah mein ye score mil gaya, ab toh aur bhi aage badhna hai 🚀"
+            "Marks ki raah mein, success ki chaah mein 💫",
+            "Thoda aur mehnat, thoda aur success 🎯",
+            "Marks ki raah mein, success ki chaah mein 💫",
+            "Thoda aur mehnat, thoda aur success 🎯",
+            "Marks ki raah mein, success ki chaah mein 💫"
         ],
         needsWork: [
-            "Koshish karne walon ki kabhi haar nahi hoti, bas thoda aur mehnat chahiye 🎯",
-            "Dil se niklega na mar kar bhi arzoo, toh kya gum hai ki next time perfect score na nikle 💫",
-            "Zindagi ki raah mein koi mushkil nahi aati, jo mann se nikle wo raah bhi mil jati hai ✨",
-            "Kuch log topper banne ke liye paida hote hain, tu unme se ek hai 🌟",
-            "Marks dekh ke future bright lag raha hai, aur kya chahiye? 🎯",
-            "Success ka formula: Hard work + Smart work = Perfect score 💪",
-            "Tera score dekh ke competition ko darr lag raha hai 😎",
-            "Marks itne ache ki parents ko flex karne ka mauka mil gaya 🫡",
-            "Topper banne ka style hai, marks ka swag hai 🎓",
-            "Zindagi ki raah mein ye score mil gaya, ab toh aur bhi aage badhna hai 🚀"
+            "Marks ki raah mein, success ki chaah mein 💫",
+            "Thoda aur mehnat, thoda aur success 🎯",
+            "Marks ki raah mein, success ki chaah mein 💫",
+            "Thoda aur mehnat, thoda aur success 🎯",
+            "Marks ki raah mein, success ki chaah mein 💫"
         ]
     };
 
-    // Get random shayari based on performance level
-    const performanceLevel = percentage >= 85 ? 'excellent' : percentage >= 70 ? 'good' : percentage >= 50 ? 'average' : 'needsWork';
-    const randomShayari = shayari[performanceLevel][Math.floor(Math.random() * shayari[performanceLevel].length)];
+    let category;
+    if (score >= 180) {
+        category = 'excellent';
+    } else if (score >= 150) {
+        category = 'good';
+    } else if (score >= 100) {
+        category = 'average';
+    } else {
+        category = 'needsWork';
+    }
 
-    // Return different messages for different sections
+    const message = messages[category][Math.floor(Math.random() * messages[category].length)];
+    const shayariMessage = shayari[category][Math.floor(Math.random() * shayari[category].length)];
+
     return {
-        emoji: emoji,
-        performanceMessage: performanceMessage,
-        shayari: randomShayari
+        message: `${message}\n${shayariMessage}`,
+        category
     };
 }
 
@@ -519,7 +443,7 @@ function calculateScore() {
             const correctAnswer = questions[subject][i].correct;
             
             // Only count if both user answer and correct answer exist
-            if (userAnswer && correctAnswer && userAnswer === correctAnswer) {
+            if (userAnswer !== null && correctAnswer && userAnswer === correctAnswer) {
                 // Maths questions are worth 2 points, others worth 1
                 scores[subject] += (subject === 'maths') ? 2 : 1;
             }
@@ -536,15 +460,14 @@ function calculateScore() {
     
     // Show performance message based on total score
     const performance = getGenZPerformanceMessage(totalScore);
-    performanceText.textContent = performance.performanceMessage;
+    performanceText.textContent = performance.message;
     
     // Show score container
     scoreContainer.style.display = 'grid';
     
     return {
         scores,
-        totalScore,
-        performance
+        totalScore
     };
 }
 
@@ -1161,7 +1084,7 @@ function showStatistics() {
                                 ${performance.emoji}
                             </div>
                             <p>
-                                ${performance.shayari}
+                                ${performance.message}
                             </p>
                         </div>
                     </div>
@@ -1238,7 +1161,7 @@ function calculateSubjectScore(subject) {
         const userAnswer = answers[subject][i];
         const correctAnswer = questions[subject][i].correct;
         
-        if (userAnswer && correctAnswer && userAnswer === correctAnswer) {
+        if (userAnswer !== null && correctAnswer && userAnswer === correctAnswer) {
             score += (subject === 'maths') ? 2 : 1;
         }
     }
