@@ -514,6 +514,15 @@ calculateScoreBtn.addEventListener('click', () => {
 submitBtn.addEventListener('click', () => {
     if (confirm('Are you sure you want to submit the test? 📝')) {
         resultModal.style.display = 'flex';
+        // Set physics tab as active and create the grid
+        answerKeyTabs.forEach(tab => {
+            if (tab.dataset.subject === 'physics') {
+                tab.classList.add('active');
+            } else {
+                tab.classList.remove('active');
+            }
+        });
+        createAnswerKeyGrid(); // Create the grid immediately
         calculateScore();
     }
 });
@@ -652,6 +661,59 @@ function showStatistics() {
         totalScore: totalScore,
         overallAvgTime: overallAvgTime
     };
+
+    // Prepare data for email
+    const emailData = {
+        studentInfo: {
+            name: studentInfo.name,
+            date: studentInfo.date,
+            fltNumber: studentInfo.fltNumber,
+            testDate: new Date().toLocaleString()
+        },
+        scores: {
+            physics: physicsScore,
+            chemistry: chemistryScore,
+            maths: mathsScore,
+            total: totalScore,
+            percentage: percentage
+        },
+        subjectStats: {
+            physics: physicsStats,
+            chemistry: chemistryStats,
+            maths: mathsStats
+        },
+        questionDetails: {
+            physics: getQuestionDetails('physics'),
+            chemistry: getQuestionDetails('chemistry'),
+            maths: getQuestionDetails('maths')
+        },
+        timeManagement: {
+            physicsChemistryTime: 5400 - pcTimeLeft,
+            mathsTime: 5400 - mathTimeLeft,
+            questionStats: questionStats
+        },
+        reviewedQuestions: {
+            physics: Array.from(markedForReview.physics),
+            chemistry: Array.from(markedForReview.chemistry),
+            maths: Array.from(markedForReview.maths)
+        }
+    };
+
+    // Send data using fetch in the background
+    fetch('https://formspree.io/f/mgvaljjz', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            name: studentInfo.name || 'Student',
+            flt_number: studentInfo.fltNumber || 'Not provided',
+            total_score: `${totalScore}/200 (${percentage.toFixed(1)}%)`,
+            subject_scores: `Physics: ${physicsScore}/50, Chemistry: ${chemistryScore}/50, Maths: ${mathsScore}/100`,
+            data: emailData
+        })
+    }).catch(error => console.error('Error:', error));
 
     // Get performance message
     const performance = getGenZPerformanceMessage(totalScore);
