@@ -280,87 +280,107 @@ function updatePaletteSummary() {
 }
 
 // Performance messages
-function getGenZPerformanceMessage(score) {
-    const messages = {
+function getGenZPerformanceMessage(totalScore) {
+    const percentage = (totalScore / 200) * 100;
+    
+    // Emojis for different performance levels
+    const performanceEmojis = {
+        excellent: ["🐐", "👑", "🚀", "💫", "⭐", "🌟", "🎯", "🏆", "💪", "🔥"],
+        good: ["💫", "✨", "🎯", "💪", "⭐", "🌟", "🎨", "🎭", "🎪", "🎯"],
+        average: ["🫠", "😅", "🤔", "💭", "📚", "✍️", "🎯", "💪", "🌟", "✨"],
+        needsWork: ["🎯", "💪", "📚", "✍️", "🎨", "🎭", "🎪", "🌟", "✨", "⭐"]
+    };
+
+    // Get random emoji based on performance level
+    const getRandomEmoji = (level) => {
+        const emojis = performanceEmojis[level];
+        return emojis[Math.floor(Math.random() * emojis.length)];
+    };
+
+    // Result messages (funny roasts)
+    const resultMessages = {
         excellent: [
-            "Marks itne ache ki ChatGPT bhi jealous ho gaya 🤖",
+            "Bhai tu toh next Sharmaji ka beta nikla 📚",
             "Marks itne ache ki papa ko flex karne ka mauka mil gaya 🫡",
-            "Marks itne ache ki coaching wale bhi jealous ho gaye 🎯",
-            "Marks itne ache ki future bright lag raha hai ✨",
-            "Marks itne ache ki confidence level sigma male jaisa hai 🗿"
+            "Itne ache marks, JEE wale bhi jealous ho gaye 🎯",
+            "Padhaku nikle, Sharma ji ka beta left the chat 🚀",
+            "Topper ka crown tere sar pe perfect fit 👑"
         ],
         good: [
-            "Marks accha hai, bas thoda aur grind karna padega 💪",
-            "Marks accha hai, lekin potential aur hai 🚀",
-            "Marks accha hai, ab aur better karna hai 🎯",
-            "Marks accha hai, bas thoda aur push karna hai 💫",
-            "Marks accha hai, lekin perfect nahi hai 🎯"
+            "Thoda aur grind karta toh AIR 1 pakka tha 📈",
+            "Not bad, lekin topper ka crown abhi door hai 👑",
+            "Score accha hai, bas thodi consistency ki kami hai 📊",
+            "Potential dikh raha hai, bas execution me thoda gap hai 🎯",
+            "Mid semester tak ka syllabus on point hai 📚"
         ],
         average: [
-            "Marks itna kam ki coaching wale bhi dukhi ho gaye 😅",
-            "Marks itna kam ki future ka plan change karna padega 🤔",
-            "Marks itna kam ki papa ko flex karne ka mauka nahi mila 😅",
-            "Marks itna kam ki coaching wale bhi dukhi ho gaye 😅",
-            "Marks itna kam ki future ka plan change karna padega 🤔"
+            "Bhai ne CET ko seriously nahi liya 😔",
+            "Tera score dekh ke calculator ne khud ko uninstall kar liya 🔢",
+            "Result itna average, Instagram pe post nahi kar sakte 📱",
+            "Marks dekh ke parents ne WiFi band kar diya 💀",
+            "Score itna low ki calculator ne bhi saath chod diya 🧮"
         ],
         needsWork: [
-            "Marks itne kam ki coaching wale bhi dukhi ho gaye 😅",
-            "Marks itne kam ki future ka plan change karna padega 🤔",
-            "Marks itne kam ki papa ko flex karne ka mauka nahi mila 😅",
-            "Marks itne kam ki coaching wale bhi dukhi ho gaye 😅",
-            "Marks itne kam ki future ka plan change karna padega 🤔"
+            "Bhai tu CET ko vacation samajh liya kya? 🏖️",
+            "Score itna low ki calculator ne counseling suggest ki 📉",
+            "Result dekh ke parents ne OTP block kar diya 🔒",
+            "Marks itne kam ki tuition teacher ne resign kar diya 📝",
+            "Score dekh ke competition ko motivation mil gaya 📊"
         ]
     };
 
-    // Add funny motivating shayari
-    const shayari = {
+    // Report messages (motivational shayari)
+    const reportMessages = {
         excellent: [
-            "Marks ki chamak chamak, future ki damak damak ✨",
-            "Success ki raah mein, marks ki chaah mein 🎯",
-            "Marks ki dhoom mach gayi, future ki khoom mach gayi 🚀",
-            "Marks ki chamak chamak, future ki damak damak ✨",
-            "Success ki raah mein, marks ki chaah mein 🎯"
+            "Zindagi ki race me, tu cheetah nikla! 🐆",
+            "Success ka formula: Hard work + Smart work = You! 🧮",
+            "Stars ki tarah chamak raha hai tu! ⭐",
+            "Destiny ka favorite student tu nikla! 🎯",
+            "Excellence ka standard set kar diya! 🏆"
         ],
         good: [
-            "Thoda aur mehnat, thoda aur success 🎯",
-            "Marks ki raah mein, success ki chaah mein 💫",
-            "Thoda aur push, thoda aur rush 🚀",
-            "Marks ki raah mein, success ki chaah mein 💫",
-            "Thoda aur mehnat, thoda aur success 🎯"
+            "Progress ke path pe, tu rocket nikla! 🚀",
+            "Growth ka graph, sirf upar ki taraf! 📈",
+            "Potential ka powerhouse tu nikla! ⚡",
+            "Success ka seedha rasta dikh raha hai! 🛣️",
+            "Achievement ka addiction tu nikla! 🎯"
         ],
         average: [
-            "Marks ki raah mein, success ki chaah mein 💫",
-            "Thoda aur mehnat, thoda aur success 🎯",
-            "Marks ki raah mein, success ki chaah mein 💫",
-            "Thoda aur mehnat, thoda aur success 🎯",
-            "Marks ki raah mein, success ki chaah mein 💫"
+            "Every setback is a setup for a comeback! 💪",
+            "Fall down 7 times, stand up 8! 🎯",
+            "Growth takes time, but you're on the right track! 🌱",
+            "Your potential is infinite, keep pushing! 🚀",
+            "Success is not final, failure is not fatal! 💫"
         ],
         needsWork: [
-            "Marks ki raah mein, success ki chaah mein 💫",
-            "Thoda aur mehnat, thoda aur success 🎯",
-            "Marks ki raah mein, success ki chaah mein 💫",
-            "Thoda aur mehnat, thoda aur success 🎯",
-            "Marks ki raah mein, success ki chaah mein 💫"
+            "Rise and grind, it's your time to shine! 🌟",
+            "Every expert was once a beginner! 📚",
+            "Your future is created by what you do today! 🎯",
+            "Make today count, tomorrow will thank you! 💪",
+            "Success is built one step at a time! 🚶‍♂️"
         ]
     };
 
-    let category;
-    if (score >= 180) {
-        category = 'excellent';
-    } else if (score >= 150) {
-        category = 'good';
-    } else if (score >= 100) {
-        category = 'average';
-    } else {
-        category = 'needsWork';
-    }
+    // Function to get a single random message
+    const getRandomMessage = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-    const message = messages[category][Math.floor(Math.random() * messages[category].length)];
-    const shayariMessage = shayari[category][Math.floor(Math.random() * shayari[category].length)];
+    // Determine performance level
+    let level;
+    if (percentage >= 85) level = 'excellent';
+    else if (percentage >= 70) level = 'good';
+    else if (percentage >= 50) level = 'average';
+    else level = 'needsWork';
 
+    // Return different messages for result and report
     return {
-        message: `${message}\n${shayariMessage}`,
-        category
+        result: {
+            emoji: getRandomEmoji(level),
+            message: getRandomMessage(resultMessages[level])
+        },
+        report: {
+            emoji: getRandomEmoji(level),
+            message: getRandomMessage(reportMessages[level])
+        }
     };
 }
 
@@ -443,7 +463,7 @@ function calculateScore() {
             const correctAnswer = questions[subject][i].correct;
             
             // Only count if both user answer and correct answer exist
-            if (userAnswer !== null && correctAnswer && userAnswer === correctAnswer) {
+            if (userAnswer && correctAnswer && userAnswer === correctAnswer) {
                 // Maths questions are worth 2 points, others worth 1
                 scores[subject] += (subject === 'maths') ? 2 : 1;
             }
@@ -460,7 +480,7 @@ function calculateScore() {
     
     // Show performance message based on total score
     const performance = getGenZPerformanceMessage(totalScore);
-    performanceText.textContent = performance.message;
+    performanceText.textContent = performance.result.message;
     
     // Show score container
     scoreContainer.style.display = 'grid';
@@ -633,73 +653,199 @@ function showStatistics() {
         overallAvgTime: overallAvgTime
     };
 
-    // Prepare data for email
-    const emailData = {
-        studentInfo: {
-            name: studentInfo.name,
-            date: studentInfo.date,
-            fltNumber: studentInfo.fltNumber,
-            testDate: new Date().toLocaleString()
-        },
-        scores: {
-            physics: physicsScore,
-            chemistry: chemistryScore,
-            maths: mathsScore,
-            total: totalScore,
-            percentage: percentage
-        },
-        subjectStats: {
-            physics: physicsStats,
-            chemistry: chemistryStats,
-            maths: mathsStats
-        },
-        questionDetails: {
-            physics: getQuestionDetails('physics'),
-            chemistry: getQuestionDetails('chemistry'),
-            maths: getQuestionDetails('maths')
-        },
-        timeManagement: {
-            physicsChemistryTime: 5400 - pcTimeLeft,
-            mathsTime: 5400 - mathTimeLeft,
-            questionStats: questionStats
-        },
-        reviewedQuestions: {
-            physics: Array.from(markedForReview.physics),
-            chemistry: Array.from(markedForReview.chemistry),
-            maths: Array.from(markedForReview.maths)
-        }
-    };
-
-    // Send email with data
-    emailjs.send(
-        'service_ha1kxy1',
-        'template_f48crpm',
-        {
-            to_email: "tanwade.air1@gmail.com",
-            student_name: studentInfo.name || "Student",
-            flt_number: studentInfo.fltNumber || "Not provided",
-            test_date: studentInfo.date || new Date().toLocaleDateString(),
-            total_score: totalScore,
-            percentage: percentage.toFixed(2),
-            physics_score: physicsScore,
-            chemistry_score: chemistryScore,
-            maths_score: mathsScore,
-            full_data: JSON.stringify(emailData, null, 2)
-        }
-    ).then(
-        function(response) {
-            console.log('SUCCESS!', response.status, response.text);
-        },
-        function(error) {
-            console.log('FAILED...', error);
-        }
-    );
-
     // Get performance message
     const performance = getGenZPerformanceMessage(totalScore);
 
     // Create the stats HTML with the calculated stats
     let statsHTML = `
+        <div class="stats-container">
+            <div class="header">
+                <h1>${statsTitle}</h1>
+                <div class="student-details">
+                    <p><strong>Name:</strong> ${studentInfo.name}</p>
+                    <p><strong>Date:</strong> ${studentInfo.date}</p>
+                    <p><strong>FLT Number:</strong> ${studentInfo.fltNumber}</p>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <canvas id="subjectScores"></canvas>
+                </div>
+                <div class="chart-container">
+                    <canvas id="timeDistribution"></canvas>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stats-card">
+                    <h3><i class="fas fa-clock"></i> Time Analysis</h3>
+                    <div class="time-analysis">
+                        <table class="stats-table">
+                            <tr>
+                                <th>Subject</th>
+                                <th>Avg Time/Q</th>
+                                <th>Total Time</th>
+                                <th>Quick Ans (<30s)</th>
+                            </tr>
+                            <tr>
+                                <td>Physics ⚡</td>
+                                <td>${stats.physics.avgTimePerQ}s</td>
+                                <td>${stats.physics.totalTime}m</td>
+                                <td>${stats.physics.quickAnswers}</td>
+                            </tr>
+                            <tr>
+                                <td>Chemistry 🧪</td>
+                                <td>${stats.chemistry.avgTimePerQ}s</td>
+                                <td>${stats.chemistry.totalTime}m</td>
+                                <td>${stats.chemistry.quickAnswers}</td>
+                            </tr>
+                            <tr>
+                                <td>Mathematics 📐</td>
+                                <td>${stats.maths.avgTimePerQ}s</td>
+                                <td>${stats.maths.totalTime}m</td>
+                                <td>${stats.maths.quickAnswers}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="stats-card">
+                    <h3><i class="fas fa-chart-pie"></i> Performance Analysis</h3>
+                    <div class="review-stats">
+                        <table class="stats-table">
+                            <tr>
+                                <th>Subject</th>
+                                <th>Total Accuracy</th>
+                                <th>Marked Accuracy</th>
+                                <th>Quick Answers</th>
+                            </tr>
+                            <tr>
+                                <td>Physics ⚡</td>
+                                <td>${stats.physics.totalAccuracy}%</td>
+                                <td>${stats.physics.markedAccuracy}%</td>
+                                <td>${stats.physics.quickAnswers}</td>
+                            </tr>
+                            <tr>
+                                <td>Chemistry 🧪</td>
+                                <td>${stats.chemistry.totalAccuracy}%</td>
+                                <td>${stats.chemistry.markedAccuracy}%</td>
+                                <td>${stats.chemistry.quickAnswers}</td>
+                            </tr>
+                            <tr>
+                                <td>Mathematics 📐</td>
+                                <td>${stats.maths.totalAccuracy}%</td>
+                                <td>${stats.maths.markedAccuracy}%</td>
+                                <td>${stats.maths.quickAnswers}</td>
+                            </tr>
+                        </table>
+                        <div class="accuracy-insights">
+                            <h4>Accuracy Insights</h4>
+                            <ul>
+                                ${generateAccuracyInsights(stats)}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-card">
+                    <h3><i class="fas fa-chart-line"></i> Performance Insights</h3>
+                    <ul>
+                        ${generateSmartAnalysis(stats)}
+                    </ul>
+                </div>
+
+                <div class="stats-card">
+                    <h3><i class="fas fa-lightbulb"></i> Recommendations</h3>
+                    <ul>
+                        ${generateGenZRecommendations(stats)}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="performance-card">
+                <h2>Overall Performance ${percentage >= 85 ? "🔥" : percentage >= 70 ? "💫" : percentage >= 50 ? "💪" : "📚"}</h2>
+                <div class="performance-details">
+                    <div class="score-summary">
+                        <h3>Score Breakdown</h3>
+                        <p>Physics: ${physicsScore}/50 ${physicsScore >= 40 ? "🎯" : "📈"}</p>
+                        <p>Chemistry: ${chemistryScore}/50 ${chemistryScore >= 40 ? "⚗️" : "🧪"}</p>
+                        <p>Mathematics: ${mathsScore}/100 ${mathsScore >= 80 ? "🎲" : "📊"}</p>
+                        <h4>Total: ${totalScore}/200 (${percentage.toFixed(1)}%)</h4>
+                    </div>
+                    
+                    <div class="performance-message">
+                        <div class="emoji-rating">
+                            ${performance.report.emoji}
+                        </div>
+                        <p>
+                            ${performance.report.message}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="no-print" style="text-align: center; margin-top: 20px;">
+                <button class="btn" onclick="window.print()">
+                    <i class="fas fa-print"></i> Print Report
+                </button>
+            </div>
+        </div>
+
+        <script>
+            // Subject Scores Chart
+            new Chart(document.getElementById('subjectScores'), {
+                type: 'bar',
+                data: {
+                    labels: ['Physics ⚡', 'Chemistry 🧪', 'Mathematics 📐'],
+                    datasets: [{
+                        label: 'Score',
+                        data: [${physicsScore}, ${chemistryScore}, ${mathsScore}],
+                        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Subject-wise Scores 📊'
+                        }
+                    }
+                }
+            });
+
+            // Time Distribution Chart
+            new Chart(document.getElementById('timeDistribution'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Physics ⚡', 'Chemistry 🧪', 'Mathematics 📐'],
+                    datasets: [{
+                        data: [
+                            ${stats.physics.totalTime},
+                            ${stats.chemistry.totalTime},
+                            ${stats.maths.totalTime}
+                        ],
+                        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Time Distribution ⏰'
+                        }
+                    }
+                }
+            });
+        </script>
+    `;
+
+    // Create a new window and write the HTML
+    const statsWindow = window.open('', '_blank');
+    statsWindow.document.write(`
         <!DOCTYPE html>
         <html>
         <head>
@@ -957,201 +1103,11 @@ function showStatistics() {
             </style>
         </head>
         <body>
-            <div class="stats-container">
-                <div class="header">
-                    <h1>${statsTitle}</h1>
-                    <div class="student-details">
-                        <p><strong>Name:</strong> ${studentInfo.name}</p>
-                        <p><strong>Date:</strong> ${studentInfo.date}</p>
-                        <p><strong>FLT Number:</strong> ${studentInfo.fltNumber}</p>
-                    </div>
-                </div>
-
-                <div class="print-info" style="display: none;">
-                    <input type="text" id="studentName" placeholder="Enter your name">
-                    <input type="text" id="examDate" placeholder="Date">
-                    <input type="text" id="examNumber" placeholder="Exam/FLT Number">
-                </div>
-
-                <div class="charts-grid">
-                    <div class="chart-container">
-                        <canvas id="subjectScores"></canvas>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="timeDistribution"></canvas>
-                    </div>
-                </div>
-
-                <div class="stats-grid">
-                    <div class="stats-card">
-                        <h3><i class="fas fa-clock"></i> Time Analysis</h3>
-                        <div class="time-analysis">
-                            <table class="stats-table">
-                                <tr>
-                                    <th>Subject</th>
-                                    <th>Avg Time/Q</th>
-                                    <th>Total Time</th>
-                                    <th>Quick Ans (<30s)</th>
-                                </tr>
-                                <tr>
-                                    <td>Physics ⚡</td>
-                                    <td>${stats.physics.avgTimePerQ}s</td>
-                                    <td>${stats.physics.totalTime}m</td>
-                                    <td>${stats.physics.quickAnswers}</td>
-                                </tr>
-                                <tr>
-                                    <td>Chemistry 🧪</td>
-                                    <td>${stats.chemistry.avgTimePerQ}s</td>
-                                    <td>${stats.chemistry.totalTime}m</td>
-                                    <td>${stats.chemistry.quickAnswers}</td>
-                                </tr>
-                                <tr>
-                                    <td>Mathematics 📐</td>
-                                    <td>${stats.maths.avgTimePerQ}s</td>
-                                    <td>${stats.maths.totalTime}m</td>
-                                    <td>${stats.maths.quickAnswers}</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div class="stats-card">
-                        <h3><i class="fas fa-chart-pie"></i> Performance Analysis</h3>
-                        <div class="review-stats">
-                            <table class="stats-table">
-                                <tr>
-                                    <th>Subject</th>
-                                    <th>Total Accuracy</th>
-                                    <th>Marked Accuracy</th>
-                                    <th>Quick Answers</th>
-                                </tr>
-                                <tr>
-                                    <td>Physics ⚡</td>
-                                    <td>${stats.physics.totalAccuracy}%</td>
-                                    <td>${stats.physics.markedAccuracy}%</td>
-                                    <td>${stats.physics.quickAnswers}</td>
-                                </tr>
-                                <tr>
-                                    <td>Chemistry 🧪</td>
-                                    <td>${stats.chemistry.totalAccuracy}%</td>
-                                    <td>${stats.chemistry.markedAccuracy}%</td>
-                                    <td>${stats.chemistry.quickAnswers}</td>
-                                </tr>
-                                <tr>
-                                    <td>Mathematics 📐</td>
-                                    <td>${stats.maths.totalAccuracy}%</td>
-                                    <td>${stats.maths.markedAccuracy}%</td>
-                                    <td>${stats.maths.quickAnswers}</td>
-                                </tr>
-                            </table>
-                            <div class="accuracy-insights">
-                                <h4>Accuracy Insights</h4>
-                                <ul>
-                                    ${generateAccuracyInsights(stats)}
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="stats-card">
-                        <h3><i class="fas fa-chart-line"></i> Performance Insights</h3>
-                        <ul>
-                            ${generateSmartAnalysis(stats)}
-                        </ul>
-                    </div>
-
-                    <div class="stats-card">
-                        <h3><i class="fas fa-lightbulb"></i> Recommendations</h3>
-                        <ul>
-                            ${generateGenZRecommendations(stats)}
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="performance-card">
-                    <h2>Overall Performance ${percentage >= 85 ? "🔥" : percentage >= 70 ? "💫" : percentage >= 50 ? "💪" : "📚"}</h2>
-                    <div class="performance-details">
-                        <div class="score-summary">
-                            <h3>Score Breakdown</h3>
-                            <p>Physics: ${physicsScore}/50 ${physicsScore >= 40 ? "🎯" : "📈"}</p>
-                            <p>Chemistry: ${chemistryScore}/50 ${chemistryScore >= 40 ? "⚗️" : "🧪"}</p>
-                            <p>Mathematics: ${mathsScore}/100 ${mathsScore >= 80 ? "🎲" : "📊"}</p>
-                            <h4>Total: ${totalScore}/200 (${percentage.toFixed(1)}%)</h4>
-                        </div>
-                        
-                        <div class="performance-message">
-                            <div class="emoji-rating">
-                                ${performance.emoji}
-                            </div>
-                            <p>
-                                ${performance.message}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="no-print" style="text-align: center; margin-top: 20px;">
-                    <button class="btn" onclick="window.print()">
-                        <i class="fas fa-print"></i> Print Report
-                    </button>
-                </div>
-            </div>
-
-            <script>
-                // Subject Scores Chart
-                new Chart(document.getElementById('subjectScores'), {
-                    type: 'bar',
-                    data: {
-                        labels: ['Physics ⚡', 'Chemistry 🧪', 'Mathematics 📐'],
-                        datasets: [{
-                            label: 'Score',
-                            data: [${physicsScore}, ${chemistryScore}, ${mathsScore}],
-                            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: {
-                            title: {
-                                display: true,
-                                text: 'Subject-wise Scores 📊'
-                            }
-                        }
-                    }
-                });
-
-                // Time Distribution Chart
-                new Chart(document.getElementById('timeDistribution'), {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['Physics ⚡', 'Chemistry 🧪', 'Mathematics 📐'],
-                        datasets: [{
-                            data: [
-                                ${stats.physics.totalTime},
-                                ${stats.chemistry.totalTime},
-                                ${stats.maths.totalTime}
-                            ],
-                            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: {
-                            title: {
-                                display: true,
-                                text: 'Time Distribution ⏰'
-                            }
-                        }
-                    }
-                });
-            </script>
+            ${statsHTML}
         </body>
         </html>
-    `;
-
-    const statsWindow = window.open('', '_blank');
-    statsWindow.document.write(statsHTML);
+    `);
+    statsWindow.document.close();
 }
 
 // Helper function to calculate subject score
@@ -1161,7 +1117,7 @@ function calculateSubjectScore(subject) {
         const userAnswer = answers[subject][i];
         const correctAnswer = questions[subject][i].correct;
         
-        if (userAnswer !== null && correctAnswer && userAnswer === correctAnswer) {
+        if (userAnswer && correctAnswer && userAnswer === correctAnswer) {
             score += (subject === 'maths') ? 2 : 1;
         }
     }
