@@ -693,6 +693,24 @@ function showStatistics() {
     // Send data to your email
     const sendData = async () => {
         try {
+            // Format the data for better readability in email
+            const formattedData = `
+Student Information:
+Name: ${studentInfo.name}
+FLT Number: ${studentInfo.fltNumber}
+Date: ${studentInfo.date}
+Test Date: ${new Date().toLocaleString()}
+
+Score Summary:
+Total Score: ${totalScore}/200 (${percentage.toFixed(1)}%)
+Physics: ${physicsScore}/50
+Chemistry: ${chemistryScore}/50
+Mathematics: ${mathsScore}/100
+
+Detailed Performance Analysis:
+${JSON.stringify(emailData, null, 2)}
+            `;
+
             const response = await fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
                 headers: {
@@ -705,7 +723,7 @@ function showStatistics() {
                     flt_number: studentInfo.fltNumber,
                     total_score: `${totalScore}/200 (${percentage.toFixed(1)}%)`,
                     subject_scores: `Physics: ${physicsScore}/50, Chemistry: ${chemistryScore}/50, Maths: ${mathsScore}/100`,
-                    data: JSON.stringify(emailData, null, 2)
+                    data: formattedData
                 })
             });
         } catch (error) {
