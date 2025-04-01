@@ -1832,4 +1832,4 @@ function generateAccuracyInsights(stats) {
     }
 
     return insights.join('');
-} 
+}  
